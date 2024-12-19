@@ -2,7 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { api } from "@/trpc/react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 type FormInput ={
     projectName: string,
@@ -12,6 +14,24 @@ type FormInput ={
 
 const CreatePage = () => {
     const { register, handleSubmit, reset } = useForm<FormInput>();
+    const createProject = api.project.createProject.useMutation();
+
+    function onSubmit(data: FormInput) {
+        createProject.mutate({
+            githubUrl: data.repoUrl,
+            name: data.projectName,
+            githubToken: data.githubToken
+        }, {
+            onSuccess: () => {
+                toast.success('Project Created Successfully')
+                reset()
+            },
+            onError: () =>{
+                toast.error('Failed to Create Project')
+            }
+        })
+    }
+    
     return (
         <div className="flex items-center gap-12 h-full justify-center">
             <img src="/PicWithComputerandgithubback" alt="Picture" className="h-56 w-auto"/>
@@ -26,7 +46,7 @@ const CreatePage = () => {
                 </div>
                 <div className="h-4"></div>
                 <div>
-                    <form onSubmit={handleSubmit((data) => console.log(data))}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <Input
                             {...register("projectName", {required: true})}
                             placeholder="Project Name"
@@ -45,7 +65,7 @@ const CreatePage = () => {
                             placeholder="GitHub Token (Optional For Private Repositories)"
                         />
                         <div className="h-4"></div>
-                        <Button>
+                        <Button type="submit" disabled={createProject.isPending}>
                             Create Project
                         </Button>
                     </form>

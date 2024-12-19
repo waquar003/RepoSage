@@ -48,10 +48,10 @@ export function AppSidebar() {
         <Sidebar collapsible="icon" variant="floating">
             <SidebarHeader>
                 <div className="flex items-center gap-2">
-                    <Image src='/logo.png' width={32} height={32} alt="logo" />
+                    <Image src='/reposage-logo-v2.svg' width={40} height={40} alt="logo" />
                     {open && (
                         <h1 className="text-xl font-bold text-primary/80"> 
-                            Logo
+                            RepoSage
                         </h1>
                     )}
                 </div>

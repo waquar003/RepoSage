@@ -11,25 +11,28 @@ import { askQuestion } from "./actions";
 import { readStreamableValue } from "ai/rsc";
 import MDEditor from "@uiw/react-md-editor"; 
 import CodeReferences from "./code-references";
+import { api } from "@/trpc/react";
+import { toast } from "sonner";
 
 const AskQuestionCard = () => {
     const { project }   = useProject();
     const [question, setQuestion] = React.useState('');
     const [open, setOpen] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
-    const [fileReferences, setFileReferences] = React.useState<{ fileName: string, sourceCode: string, summary: string }[]>([])
+    const [filesReferences, setFilesReferences] = React.useState<{ fileName: string, sourceCode: string, summary: string }[]>([])
     const [answer, setAnswer] = React.useState('')
+    const saveAnswer = api.project.saveAnswer.useMutation()
     
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         setAnswer('')
-        setFileReferences([])
+        setFilesReferences([])
         e.preventDefault()
         if(!project?.id)    return
         setLoading(true)
         
         const { output, fileReferences } = await askQuestion(question, project.id)
         setOpen(true);
-        setFileReferences(fileReferences)
+        setFilesReferences(fileReferences)
 
         for await (const chunk of readStreamableValue(output)) {
             if(chunk) {
@@ -44,21 +47,40 @@ const AskQuestionCard = () => {
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogContent className="sm:max-w-[80vw]">
                     <DialogHeader>
-                        <DialogTitle>
-                            <Image src='/reposage-logo-v2.svg' alt="RepoSage" width={40} height={40} />
-                        </DialogTitle>
+                        <div className="flex items-center gap-2">
+                            <DialogTitle>
+                                <Image src='/reposage-logo-v2.svg' alt="RepoSage" width={40} height={40} />
+                            </DialogTitle>
+                            <Button disabled={saveAnswer.isPending} variant={'outline'} onClick={() => {
+                                saveAnswer.mutate({
+                                    projectId: project!.id, 
+                                    question,
+                                    answer,
+                                    filesReferences
+                                }, {
+                                    onSuccess: () => {
+                                        toast.success('Answer Saved!')
+                                    },
+                                    onError: () => {
+                                        toast.error('Failed to Save Answer!')
+                                    },
+                                })
+                            }}>
+                                Save Answer
+                            </Button>
+                        </div>
                     </DialogHeader>
                     
                     <MDEditor.Markdown source={answer} className="max-w-[70vw] !h-full max-h-[40vh] overflow-scroll"/>
                     <div className="h-4"></div>
-                    <CodeReferences filesReferences={fileReferences} />
+                    <CodeReferences filesReferences={filesReferences} />
                     
                     <Button type="button" onClick={() => {setOpen(false)}}>
                         Close
                     </Button>
 
                     <h1>Files References</h1>
-                    {fileReferences.map((file: { fileName: string }) => <span>{file.fileName}</span>)}
+                    {filesReferences.map((file: { fileName: string }) => <span>{file.fileName}</span>)}
                 </DialogContent>
             </Dialog>
             

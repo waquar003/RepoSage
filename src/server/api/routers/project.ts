@@ -2,6 +2,7 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { pollCommits } from "@/lib/github";
 import { indexGithubRepo } from "@/lib/github-loader";
+import { TRPCError } from "@trpc/server";
 
 export const projectRouter = createTRPCRouter({
     createProject: protectedProcedure.input(
@@ -22,6 +23,17 @@ export const projectRouter = createTRPCRouter({
                 }
             }
         })
+        try {
+            // Index the GitHub repo
+            await indexGithubRepo(project.id, input.githubUrl, input.githubToken);
+        } catch (error: any) {
+            // If GitHub indexing fails, throw a specific error
+            throw new TRPCError({
+                code: 'BAD_REQUEST',
+                message: error.message || 'Failed to index GitHub repository. Please check the URL and token.',
+                cause: error
+            });
+        }
         await pollCommits(project.id)
         return project
     }),
@@ -69,7 +81,7 @@ export const projectRouter = createTRPCRouter({
                 filesReferences: input.filesReferences,
                 projectId: input.projectId,
                 question: input.question,
-                userId: ctx.user.userId
+                userId: ctx.user.userId!
             }
         })
         return question

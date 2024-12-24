@@ -106,7 +106,7 @@ async function fetchProjectGithubUrl(projectId: string) {
 
 async function filterUnprocessedCommits(projectId: string, commitHashes: Response[]) {
     const processedCommits = await db.commit.findMany({
-        where: {id: projectId}
+        where: {projectId}
     })
 
     const unprocessedCommits = commitHashes.filter(commit => !processedCommits.some((processedCommit: any) => processedCommit.commitHash === commit.commitHash))

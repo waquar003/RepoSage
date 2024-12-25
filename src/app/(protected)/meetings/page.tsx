@@ -6,12 +6,18 @@ import Link from "next/link";
 import MeetingCard from "../dashboard/meeting-card";
 import { api } from "@/trpc/react";
 import useProject from "@/hooks/use-project";
+import { toast } from "sonner";
+import useRefetch from "@/hooks/use-refetch";
+import { Trash } from "lucide-react";
 
 const MeetingsPage = () => {
     const { project } = useProject();
     const { data: meetings, isLoading } = api.project.getMeetings.useQuery({ projectId: project?.id! }, {
         refetchInterval: 5000
     })
+    const deleteMeeting = api.project.deleteMeeting.useMutation();
+    const refetch = useRefetch();
+    
     return (
         <>
             <MeetingCard />
@@ -50,6 +56,14 @@ const MeetingsPage = () => {
                                     View Meeting
                                 </Button>
                             </Link>
+                            <Button disabled={deleteMeeting.isPending} className="border-red-500 hover:bg-red-50 text-red-500" variant="outline" onClick={() => deleteMeeting.mutate({ meetingId: meeting.id }, {
+                                onSuccess: () => {
+                                    toast.success('Meeting deleted successfully')
+                                    refetch()
+                                }
+                            })}>
+                                <Trash />
+                            </Button>
                         </div>
                     </li>
                 ))}

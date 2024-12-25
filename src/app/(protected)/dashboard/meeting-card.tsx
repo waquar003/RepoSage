@@ -10,10 +10,24 @@ import { toast } from 'sonner';
 import useProject from '@/hooks/use-project';
 import { useRouter } from 'next/navigation';
 import { api } from '@/trpc/react';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 
 const MeetingCard = () => {
     const router = useRouter();
     const { project } = useProject();
+    const processMeeting = useMutation({
+        mutationFn: async (data: {meetingUrl: string, meetingId: string, projectId: string}) => {
+            const { meetingUrl, meetingId, projectId } = data
+            const response = await axios.post('/api/process-meeting', {
+                meetingUrl,
+                meetingId,
+                projectId
+            })
+            return response.data
+        }
+    });
+
     const [isUploading, setIsUploading] = React.useState(false);
     const [progress, setProgress] = React.useState(0);
     
@@ -44,7 +58,7 @@ const MeetingCard = () => {
                 );
 
                 // Upload meeting details
-                await uploadMeeting.mutateAsync({
+                const meeting = await uploadMeeting.mutateAsync({
                     projectId: project?.id!,
                     meetingUrl: downloadURL,
                     name: file.name
@@ -52,6 +66,13 @@ const MeetingCard = () => {
 
                 toast.success('Meeting uploaded successfully');
                 router.push('/meetings');
+
+                // Process meeting
+                processMeeting.mutateAsync({
+                    meetingUrl: downloadURL,
+                    meetingId: meeting.id!,
+                    projectId: project?.id!
+                })
             } catch (error) {
                 console.error('Upload error:', error);
                 toast.error('Failed to upload meeting');

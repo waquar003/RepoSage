@@ -5,6 +5,46 @@ import { db } from "@/server/db";
 import { Octokit } from "octokit";
 import { Prisma } from "@prisma/client";
 
+const getFileCount = async (path: string, octokit: Octokit, owner: string, repo: string, accumulator: number = 0) => {
+    const { data } = await octokit.rest.repos.getContent({ owner, repo, path });
+    if(!Array.isArray(data)&& data.type==='file') return accumulator+1;
+    
+    if(Array.isArray(data)) {
+        let fileCount = 0;
+        const directories : string[] =[]
+
+        for(const item of data) {
+            if(item.type === 'dir') {
+                directories.push(item.path);
+            } else {
+                fileCount++;
+            }
+        }
+
+        if(directories.length > 0) {    
+            const directoryCounts = await Promise.all(
+                directories.map(directoryPath => getFileCount(directoryPath, octokit, owner, repo, 0))
+            );
+            fileCount += directoryCounts.reduce((acc, count) => acc + count, 0);
+        } 
+        return accumulator + fileCount
+    }
+
+    return accumulator
+}
+
+export const checkCredits = async (githubUrl: string, githubToken?: string) => {
+    const octokit = new Octokit({ auth: githubToken || process.env.GITHUB_TOKEN });
+    const [owner, repo] = githubUrl.replace('https://github.com/', '').split('/');
+    
+    if(!owner || !repo) {
+        throw new Error("Invalid github url")
+    }
+
+    const fileCount = await getFileCount('', octokit, owner, repo);
+    return fileCount
+}
+
 // Batch size for database operations
 const DB_BATCH_SIZE = 10;
 

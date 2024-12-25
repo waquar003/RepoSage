@@ -96,7 +96,7 @@ export const loadGithubRepo = async (githubUrl: string, githubToken?: string) =>
 
     const branch = await getDefaultBranch(githubUrl, githubToken);
     const loader = new GithubRepoLoader(githubUrl, {
-        accessToken: githubToken,
+        accessToken: githubToken || process.env.GITHUB_TOKEN,
         branch,
         ignoreFiles: [
             '**/node_modules/**/*', 

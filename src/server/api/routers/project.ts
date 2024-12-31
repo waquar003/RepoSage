@@ -266,5 +266,17 @@ export const projectRouter = createTRPCRouter({
         })
 
         return { fileCount, userCredits: userCredits?.credits || 0 }
-    })
+    }),
+
+    getTransactions: protectedProcedure.query(async ({ ctx }) => {
+        const transactions = await ctx.db.stripeTransaction.findMany({
+            where: {
+                userId: ctx.user.userId!
+            },
+            include: {
+                user: true,
+            }
+        })
+        return transactions
+    })  
 });

@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     const session = event.data.object as Stripe.Checkout.Session;
 
     if (event.type === "checkout.session.completed") {
-        const credits = session.metadata?.credits;
+        const credits = Number(session.metadata?.credits);
         const userId = session.client_reference_id;
 
         if(!userId || !credits) {
@@ -49,5 +49,7 @@ export async function POST(request: Request) {
         })
 
         return NextResponse.json({ status: 200 }, { statusText: "Credits added Successfully" });
+    } else {
+        return NextResponse.json({ error: "Invalid event type" }, { status: 400 });
     }
 }

@@ -1,21 +1,29 @@
 "use client"
+
+import React from "react"
+import { useDropzone } from 'react-dropzone'
+import { useMutation } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
+import axios from 'axios'
+import { toast } from 'sonner'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { uploadFile } from "@/lib/cloudinary";
-import React from "react";
-import { useDropzone } from 'react-dropzone';
-import { Upload, Presentation } from 'lucide-react';
-import { toast } from 'sonner';
-import useProject from '@/hooks/use-project';
-import { useRouter } from 'next/navigation';
-import { api } from '@/trpc/react';
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+import 'react-circular-progressbar/dist/styles.css'
+import { Upload, Presentation, FileAudio } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { uploadFile } from "@/lib/cloudinary"
+import useProject from '@/hooks/use-project'
+import { api } from '@/trpc/react'
 
 const MeetingCard = () => {
-    const router = useRouter();
-    const { project } = useProject();
+    const router = useRouter()
+    const { project } = useProject()
+    const [isUploading, setIsUploading] = React.useState(false)
+    const [progress, setProgress] = React.useState(0)
+    
+    const uploadMeeting = api.project.uploadMeeting.useMutation()
+    const getSignature = api.cloudinary.getSignature.useMutation()
+
     const processMeeting = useMutation({
         mutationFn: async (data: {meetingUrl: string, meetingId: string, projectId: string}) => {
             const { meetingUrl, meetingId, projectId } = data
@@ -26,15 +34,9 @@ const MeetingCard = () => {
             })
             return response.data
         }
-    });
+    })
 
-    const [isUploading, setIsUploading] = React.useState(false);
-    const [progress, setProgress] = React.useState(0);
-    
-    const uploadMeeting = api.project.uploadMeeting.useMutation();
-    const getSignature = api.cloudinary.getSignature.useMutation();
-
-    const { getRootProps, getInputProps } = useDropzone({
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
         accept: {
             'audio/*': ['.mp3', '.wav', '.m4a']
         },
@@ -42,87 +44,88 @@ const MeetingCard = () => {
         maxSize: 50_000_000,
         onDrop: async (acceptedFiles) => {
             try {
-                setIsUploading(true);
-                const file = acceptedFiles[0];
-                if (!file) return;
+                setIsUploading(true)
+                const file = acceptedFiles[0]
+                if (!file) return
 
-                // Get signature first
-                const { signature, timestamp } = await getSignature.mutateAsync();
-                
-                // Upload file with signature
-                const downloadURL = await uploadFile(
-                    file,
-                    signature,
-                    timestamp,
-                    setProgress
-                );
+                const { signature, timestamp } = await getSignature.mutateAsync()
+                const downloadURL = await uploadFile(file, signature, timestamp, setProgress)
 
-                // Upload meeting details
                 const meeting = await uploadMeeting.mutateAsync({
                     projectId: project?.id!,
                     meetingUrl: downloadURL,
                     name: file.name
-                });
+                })
 
-                toast.success('Meeting uploaded successfully');
-                router.push('/meetings');
+                toast.success('Meeting uploaded successfully')
+                router.push('/meetings')
 
-                // Process meeting
                 processMeeting.mutateAsync({
                     meetingUrl: downloadURL,
                     meetingId: meeting.id!,
                     projectId: project?.id!
                 })
             } catch (error) {
-                console.error('Upload error:', error);
-                toast.error('Failed to upload meeting');
+                console.error('Upload error:', error)
+                toast.error('Failed to upload meeting')
             } finally {
-                setIsUploading(false);
+                setIsUploading(false)
             }
         }
-    });
+    })
 
     return (
-        <Card className="col-span-2 flex flex-col items-center justify-center p-10" {...getRootProps()}>
-            {!isUploading && (
-                <>
-                    <Presentation className="h-10 w-10 animate-bounce" />
-                    <h3 className="mt-2 text-sm font-semibold text-gray-900">
-                        Create a new Meeting
-                    </h3>
-                    <p className="mt-1 text-center text-sm text-gray-500">
-                        Analyse your meeting with RepoSage.
-                        <br />
-                        Powered by AI.
-                    </p>
-                    <div className="mt-6">
-                        <Button disabled={isUploading}>
-                            <Upload className="ml-0.5 mr-1.5 h-5 w-5" aria-hidden="true" />
-                            Upload Meeting
-                            <input className="hidden" {...getInputProps()} />
-                        </Button>
-                    </div>
-                </>
-            )}
-            {isUploading && (
-                <div className="">
-                    <CircularProgressbar 
-                        value={progress} 
-                        text={`${progress}%`} 
-                        className="size-20"
-                        styles={buildStyles({
-                            pathColor: '#2e7d32',
-                            textColor: '#2e7d32',
-                            trailColor: '#d9d9d9'
-                        })}
-                    />
-                    <p className="text-sm text-gray-500 text-center">
-                        Uploading your meeting...
-                    </p>
+        <Card className="col-span-2 overflow-hidden">
+            <CardHeader className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+                <CardTitle className="flex items-center text-lg font-semibold">
+                    <Presentation className="mr-2 h-5 w-5" />
+                    Create a New Meeting
+                </CardTitle>
+            </CardHeader>
+            <CardContent>
+                <div
+                    {...getRootProps()}
+                    className={`mt-4 flex h-48 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 transition-colors ${
+                        isDragActive ? 'border-primary bg-primary/10' : 'border-gray-300'
+                    }`}
+                >
+                    <input {...getInputProps()} />
+                    {!isUploading && (
+                        <>
+                            <FileAudio className="mb-2 h-10 w-10 text-gray-400" />
+                            <p className="mb-2 text-sm font-medium text-gray-900">
+                                {isDragActive ? 'Drop the audio file here' : 'Drag & drop an audio file here'}
+                            </p>
+                            <p className="text-xs text-gray-500">MP3, WAV, or M4A (max. 50MB)</p>
+                            <Button className="mt-4" size="sm">
+                                <Upload className="mr-2 h-4 w-4" />
+                                Select File
+                            </Button>
+                        </>
+                    )}
+                    {isUploading && (
+                        <div className="flex flex-col items-center">
+                            <CircularProgressbar
+                                value={progress}
+                                text={`${progress}%`}
+                                className="h-20 w-20"
+                                styles={buildStyles({
+                                    pathColor: '#3b82f6',
+                                    textColor: '#3b82f6',
+                                    trailColor: '#e2e8f0'
+                                })}
+                            />
+                            <p className="mt-2 text-sm font-medium text-gray-900">Uploading your meeting...</p>
+                        </div>
+                    )}
                 </div>
-            )}
+                <p className="mt-4 text-center text-xs text-gray-500">
+                    Analyse your meeting with RepoSage. Powered by AI.
+                </p>
+            </CardContent>
         </Card>
-    );
-};
+    )
+}
 
-export default MeetingCard;
+export default MeetingCard
+

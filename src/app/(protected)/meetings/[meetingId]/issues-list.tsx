@@ -1,11 +1,13 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { api, RouterOutputs } from "@/trpc/react"
-import { VideoIcon } from "lucide-react"
 import React from "react"
+import { format } from "date-fns"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Skeleton } from "@/components/ui/skeleton"
+import { api, RouterOutputs } from "@/trpc/react"
+import { Clock, FileText, MessageCircle } from 'lucide-react'
 
 type Props = {
     meetingId: string
@@ -16,77 +18,108 @@ const IssuesList = ({ meetingId }: Props) => {
         refetchInterval: 4000
     })
     
-    if(isLoading || !meeting) return <div>Loading...</div>
+    if (isLoading) return <IssuesListSkeleton />
+    if (!meeting) return <div className="text-center py-8 text-muted-foreground">No meeting data found.</div>
 
     return (
-        <>
-            <div className="p-8">
-                <div className="mx-auto flex max-w-2xl items-center justify-between gap-x-8 border-b pb-6 lg:mx-0 lg:max-w-none ">
-                    <div className="flex items-center gap-x-6">
-                        <div className="rounded-full border bg-white p-3">
-                            <VideoIcon className="h-6 w-6" />
-                        </div>
-                        <h1>
-                            <div className="text-sm loading-6 text-gray-600">
-                                Meeting on {""}{meeting.createdAt.toLocaleDateString()}
-                            </div>
-                            <div className="mt-1 text-base font-semibold loading-6 text-gray-900">
-                                {meeting.name}
-                            </div>
-                        </h1>
-                    </div>
+        <div className="space-y-6">
+            <div className="flex items-center justify-between">
+                <div>
+                    <h2 className="text-2xl font-semibold">{meeting.name}</h2>
+                    <p className="text-sm text-muted-foreground">
+                        Meeting on {format(new Date(meeting.createdAt), "MMMM d, yyyy")}
+                    </p>
                 </div>
-
-                <div className="h-4"></div>
-                <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-                    {meeting.issues.map(issue => (
-                        <IssueCard key={issue.id} issue={issue} />
-                    ))}
+                <div className="flex items-center gap-2">
+                    <Clock className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">
+                        {meeting.issues.length} issues identified
+                    </span>
                 </div>
             </div>
-        </>
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {meeting.issues.map(issue => (
+                    <IssueCard key={issue.id} issue={issue} />
+                ))}
+            </div>
+        </div>
     )
 }
 
 function IssueCard({ issue }: { issue: NonNullable<RouterOutputs["project"]["getMeetingById"]>["issues"][number] }) {
     const [open, setOpen] = React.useState(false)
+
     return (
         <>
-            <Dialog open={open} onOpenChange={setOpen}>
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>{issue.gist}</DialogTitle>
-                        <DialogDescription>{issue.createdAt.toLocaleDateString()}</DialogDescription>
-                        <p className="text-gray-600">{issue.headline}</p>
-                        <blockquote className="mt-2 border-l-4 border-gray-300 bg-gray-50 p-4">
-                            <span className="text-sm text-gray-600">
-                                {issue.start} - { issue.end}
-                            </span>
-                            <p className="font-medium italic leading-relaxed text-gray-900">
-                                {issue.summary}
-                            </p>
-                        </blockquote>
-                    </DialogHeader>
-                </DialogContent>
-            </Dialog>
-
-            <Card className="relative">
+            <Card className="flex flex-col justify-between">
                 <CardHeader>
-                    <CardTitle className="text-xl">{issue.gist}</CardTitle>
-                    <div className="border-b"></div>
-                    <CardDescription className="text-xs">
-                        {issue.headline}
-                    </CardDescription>
+                    <CardTitle className="text-lg">{issue.gist}</CardTitle>
+                    <CardDescription className="line-clamp-2">{issue.headline}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <Button onClick={() => setOpen(true)}>
-                        Details
-                    </Button>
+                    <p className="text-sm text-muted-foreground mb-2">
+                        <span className="font-medium">Time:</span> {issue.start} - {issue.end}
+                    </p>
+                    <p className="text-sm line-clamp-3">{issue.summary}</p>
                 </CardContent>
+                <CardFooter>
+                    <Button variant="outline" onClick={() => setOpen(true)}>View Details</Button>
+                </CardFooter>
             </Card>
-        
+
+            <Dialog open={open} onOpenChange={setOpen}>
+                <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                        <DialogTitle>{issue.gist}</DialogTitle>
+                        <DialogDescription>
+                            {format(new Date(issue.createdAt), "MMMM d, yyyy")}
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="space-y-4">
+                        <div>
+                            <h4 className="text-sm font-medium mb-1">Headline</h4>
+                            <p className="text-sm text-muted-foreground">{issue.headline}</p>
+                        </div>
+                        <div>
+                            <h4 className="text-sm font-medium mb-1">Time</h4>
+                            <p className="text-sm text-muted-foreground">{issue.start} - {issue.end}</p>
+                        </div>
+                        <div>
+                            <h4 className="text-sm font-medium mb-1">Summary</h4>
+                            <p className="text-sm text-muted-foreground">{issue.summary}</p>
+                        </div>
+                    </div>
+                </DialogContent>
+            </Dialog>
         </>
     )
 }
 
+const IssuesListSkeleton = () => (
+    <div className="space-y-6">
+        <Skeleton className="h-8 w-64" />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[...Array(6)].map((_, index) => (
+                <Card key={index} className="flex flex-col justify-between">
+                    <CardHeader>
+                        <Skeleton className="h-6 w-3/4" />
+                        <Skeleton className="h-4 w-full mt-2" />
+                    </CardHeader>
+                    <CardContent>
+                        <Skeleton className="h-4 w-1/2 mb-2" />
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-full mt-1" />
+                        <Skeleton className="h-4 w-3/4 mt-1" />
+                    </CardContent>
+                    <CardFooter>
+                        <Skeleton className="h-9 w-full" />
+                    </CardFooter>
+                </Card>
+            ))}
+        </div>
+    </div>
+)
+
 export default IssuesList
+

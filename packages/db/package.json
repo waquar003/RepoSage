@@ -1,22 +1,22 @@
 {
-  "name": "@reposage/db",
-  "version": "1.0.0",
-  "description": "Package to manage the schema to the database",
-  "main": "index.ts",
-  "scripts": {
-    "db:generate": "prisma generate",
-    "db:push": "prisma db push"
-  },
-  "dependencies": {
-    "@prisma/adapter-pg": "^7.4.2",
-    "@prisma/client": "^7.4.2",
-    "pg": "^8.19.0"
-  },
-  "devDependencies": {
-    "@types/pg": "^8.18.0",
-    "prisma": "^7.4.2",
-    "typescript": "^5.9.3"
-  },
-  "author": "Waquar Ahmad",
-  "license": "ISC"
+    "name": "@reposage/db",
+    "version": "1.0.0",
+    "description": "Package to manage the schema to the database",
+    "main": "index.ts",
+    "scripts": {
+        "db:generate": "prisma generate",
+        "db:push": "prisma db push"
+    },
+    "dependencies": {
+        "@prisma/adapter-pg": "^7.4.2",
+        "@prisma/client": "^7.4.2",
+        "pg": "^8.19.0"
+    },
+    "devDependencies": {
+        "@types/pg": "^8.18.0",
+        "prisma": "^7.4.2",
+        "typescript": "^5.9.3"
+    },
+    "author": "Waquar Ahmad",
+    "license": "ISC"
 }

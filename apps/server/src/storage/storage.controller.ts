@@ -3,10 +3,10 @@ import { StorageService } from './storage.service';
 
 @Controller('storage')
 export class StorageController {
-  constructor(private readonly storageService: StorageService) {}
+    constructor(private readonly storageService: StorageService) {}
 
-  @Post('signature')
-  getSignature() {
-    return this.storageService.getSignature();
-  }
+    @Post('signature')
+    getSignature() {
+        return this.storageService.getSignature();
+    }
 }

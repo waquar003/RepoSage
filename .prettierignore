@@ -1,0 +1,20 @@
+# Dependency directories
+node_modules/
+.next/
+dist/
+build/
+out/
+
+# Generated Database Client (CRITICAL)
+packages/db/src/generated/
+
+# Environment files
+.env
+.env.*
+
+# Lock files and assets
+package-lock.json
+public/
+
+# Skipping Legacy-monolith
+/apps/legacy-monolith

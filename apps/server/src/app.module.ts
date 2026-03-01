@@ -6,8 +6,8 @@ import { TranscriptionModule } from './transcription/transcription.module';
 import { DatabaseModule } from './database/database.module';
 
 @Module({
-  imports: [StorageModule, TranscriptionModule, DatabaseModule],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [StorageModule, TranscriptionModule, DatabaseModule],
+    controllers: [AppController],
+    providers: [AppService],
 })
 export class AppModule {}

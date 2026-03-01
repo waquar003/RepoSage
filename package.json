@@ -1,16 +1,22 @@
 {
-  "name": "reposage-workspace",
-  "version": "1.0.0",
-  "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
-  "scripts": {
-    "dev:legacy": "npm run dev --workspace=legacy-monolith",
-    "build:legacy": "npm run build --workspace=legacy-monolith",
-    "install:legacy": "npm install --workspace=legacy-monolith",
-    "build:all": "npm run build --workspaces",
-    "install:all": "npm install"
-  }
+    "name": "reposage-workspace",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": [
+        "apps/*",
+        "packages/*"
+    ],
+    "scripts": {
+        "dev:legacy": "npm run dev --workspace=legacy-monolith",
+        "build:legacy": "npm run build --workspace=legacy-monolith",
+        "install:legacy": "npm install --workspace=legacy-monolith",
+        "build:all": "npm run build --workspaces",
+        "install:all": "npm install",
+        "format": "prettier --write \"**/*.{ts,tsx,js,jsx,mjs,json,md}\"",
+        "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mjs,json,md}\""
+    },
+    "devDependencies": {
+        "prettier": "^3.8.1",
+        "prettier-plugin-tailwindcss": "^0.7.2"
+    }
 }

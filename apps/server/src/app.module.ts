@@ -5,9 +5,10 @@ import { StorageModule } from './storage/storage.module';
 import { TranscriptionModule } from './transcription/transcription.module';
 import { DatabaseModule } from './database/database.module';
 import { QueueModule } from './queue/queue.module';
+import { MeetingsModule } from './meetings/meetings.module';
 
 @Module({
-    imports: [StorageModule, TranscriptionModule, DatabaseModule, QueueModule],
+    imports: [StorageModule, TranscriptionModule, DatabaseModule, QueueModule, MeetingsModule],
     controllers: [AppController],
     providers: [AppService],
 })

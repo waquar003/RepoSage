@@ -30,4 +30,16 @@ export class TranscriptionService {
             );
         }
     }
+
+    async getTranscript(transcriptId: string) {
+        try {
+            const transcript = await this.client.transcripts.get(transcriptId);
+            return transcript;
+        } catch (error) {
+            console.log('Failed to get transcription from AssemblyAI: ', error);
+            throw new InternalServerErrorException(
+                'Failed to get the transcription data from transcription service provider',
+            );
+        }
+    }
 }

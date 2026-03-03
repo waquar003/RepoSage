@@ -7,6 +7,7 @@ import { DatabaseModule } from './database/database.module';
 import { QueueModule } from './queue/queue.module';
 import { MeetingsModule } from './meetings/meetings.module';
 import { BillingModule } from './billing/billing.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
     imports: [
@@ -16,6 +17,7 @@ import { BillingModule } from './billing/billing.module';
         QueueModule,
         MeetingsModule,
         BillingModule,
+        UsersModule,
     ],
     controllers: [AppController],
     providers: [AppService],

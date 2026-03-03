@@ -14,7 +14,7 @@ export class MeetingsController {
         return this.meetingsService.processNewMeeting(projectId, name, audioUrl);
     }
 
-    @Post('webhook/:meetingId')
+    @Post('webhook/meeting/:meetingId')
     @HttpCode(200)
     async handleTranscriptionWebhook(
         @Param('meetingId') meetingId: string,

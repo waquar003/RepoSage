@@ -87,7 +87,7 @@ export type Utterance = Prisma.UtteranceModel
  */
 export type Issue = Prisma.IssueModel
 /**
- * Model StripeTransaction
+ * Model Transaction
  * 
  */
-export type StripeTransaction = Prisma.StripeTransactionModel
+export type Transaction = Prisma.TransactionModel

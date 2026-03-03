@@ -29,7 +29,7 @@ model User {
 
     questionsAsked Question[]
 
-    stripeTransactions StripeTransaction[]
+    Transactions Transaction[]
 }
 
 model Project {
@@ -166,7 +166,7 @@ enum MeetingStatus {
 }
 
 
-model StripeTransaction {
+model Transaction {
     id String @id @default(cuid())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt

@@ -60,7 +60,7 @@ export const ModelName = {
   Meeting: 'Meeting',
   Utterance: 'Utterance',
   Issue: 'Issue',
-  StripeTransaction: 'StripeTransaction'
+  Transaction: 'Transaction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -201,7 +201,7 @@ export const IssueScalarFieldEnum = {
 export type IssueScalarFieldEnum = (typeof IssueScalarFieldEnum)[keyof typeof IssueScalarFieldEnum]
 
 
-export const StripeTransactionScalarFieldEnum = {
+export const TransactionScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -209,7 +209,7 @@ export const StripeTransactionScalarFieldEnum = {
   credits: 'credits'
 } as const
 
-export type StripeTransactionScalarFieldEnum = (typeof StripeTransactionScalarFieldEnum)[keyof typeof StripeTransactionScalarFieldEnum]
+export type TransactionScalarFieldEnum = (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum]
 
 
 export const SortOrder = {

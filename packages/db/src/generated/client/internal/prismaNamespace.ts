@@ -393,7 +393,7 @@ export const ModelName = {
   Meeting: 'Meeting',
   Utterance: 'Utterance',
   Issue: 'Issue',
-  StripeTransaction: 'StripeTransaction'
+  Transaction: 'Transaction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -409,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "project" | "userToProject" | "commit" | "sourceCodeEmbedding" | "question" | "meeting" | "utterance" | "issue" | "stripeTransaction"
+    modelProps: "user" | "project" | "userToProject" | "commit" | "sourceCodeEmbedding" | "question" | "meeting" | "utterance" | "issue" | "transaction"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1079,77 +1079,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    StripeTransaction: {
-      payload: Prisma.$StripeTransactionPayload<ExtArgs>
-      fields: Prisma.StripeTransactionFieldRefs
+    Transaction: {
+      payload: Prisma.$TransactionPayload<ExtArgs>
+      fields: Prisma.TransactionFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.StripeTransactionFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeTransactionPayload> | null
+          args: Prisma.TransactionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.StripeTransactionFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeTransactionPayload>
+          args: Prisma.TransactionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload>
         }
         findFirst: {
-          args: Prisma.StripeTransactionFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeTransactionPayload> | null
+          args: Prisma.TransactionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.StripeTransactionFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeTransactionPayload>
+          args: Prisma.TransactionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload>
         }
         findMany: {
-          args: Prisma.StripeTransactionFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeTransactionPayload>[]
+          args: Prisma.TransactionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload>[]
         }
         create: {
-          args: Prisma.StripeTransactionCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeTransactionPayload>
+          args: Prisma.TransactionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload>
         }
         createMany: {
-          args: Prisma.StripeTransactionCreateManyArgs<ExtArgs>
+          args: Prisma.TransactionCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.StripeTransactionCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeTransactionPayload>[]
+          args: Prisma.TransactionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload>[]
         }
         delete: {
-          args: Prisma.StripeTransactionDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeTransactionPayload>
+          args: Prisma.TransactionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload>
         }
         update: {
-          args: Prisma.StripeTransactionUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeTransactionPayload>
+          args: Prisma.TransactionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload>
         }
         deleteMany: {
-          args: Prisma.StripeTransactionDeleteManyArgs<ExtArgs>
+          args: Prisma.TransactionDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.StripeTransactionUpdateManyArgs<ExtArgs>
+          args: Prisma.TransactionUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.StripeTransactionUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeTransactionPayload>[]
+          args: Prisma.TransactionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload>[]
         }
         upsert: {
-          args: Prisma.StripeTransactionUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeTransactionPayload>
+          args: Prisma.TransactionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransactionPayload>
         }
         aggregate: {
-          args: Prisma.StripeTransactionAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateStripeTransaction>
+          args: Prisma.TransactionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTransaction>
         }
         groupBy: {
-          args: Prisma.StripeTransactionGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.StripeTransactionGroupByOutputType>[]
+          args: Prisma.TransactionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TransactionGroupByOutputType>[]
         }
         count: {
-          args: Prisma.StripeTransactionCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.StripeTransactionCountAggregateOutputType> | number
+          args: Prisma.TransactionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TransactionCountAggregateOutputType> | number
         }
       }
     }
@@ -1314,7 +1314,7 @@ export const IssueScalarFieldEnum = {
 export type IssueScalarFieldEnum = (typeof IssueScalarFieldEnum)[keyof typeof IssueScalarFieldEnum]
 
 
-export const StripeTransactionScalarFieldEnum = {
+export const TransactionScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -1322,7 +1322,7 @@ export const StripeTransactionScalarFieldEnum = {
   credits: 'credits'
 } as const
 
-export type StripeTransactionScalarFieldEnum = (typeof StripeTransactionScalarFieldEnum)[keyof typeof StripeTransactionScalarFieldEnum]
+export type TransactionScalarFieldEnum = (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1559,7 +1559,7 @@ export type GlobalOmitConfig = {
   meeting?: Prisma.MeetingOmit
   utterance?: Prisma.UtteranceOmit
   issue?: Prisma.IssueOmit
-  stripeTransaction?: Prisma.StripeTransactionOmit
+  transaction?: Prisma.TransactionOmit
 }
 
 /* Types for Logging */

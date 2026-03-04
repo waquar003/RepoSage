@@ -11,6 +11,7 @@ import { UsersService } from './users.service';
 import type { FastifyRequest } from 'fastify';
 import { Webhook } from 'svix';
 import type { WebhookEvent } from '@clerk/backend';
+import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 
 @Controller('users')
 export class UsersController {
@@ -18,6 +19,7 @@ export class UsersController {
 
     @Post('webhook/user')
     @HttpCode(200)
+    @ResponseMessage('User identity synchronized successfully')
     async handleUserWebhook(
         @Headers('svix-id') svixId: string,
         @Headers('svix-timestamp') svixTimestamp: string,
@@ -45,13 +47,11 @@ export class UsersController {
         }
 
         if (event.type === 'user.created' || event.type === 'user.updated') {
-            await this.usersService.syncUser(event.data);
+            return await this.usersService.syncUser(event.data);
         } else if (event.type === 'user.deleted') {
             if (event.data.id) {
-                await this.usersService.deleteUser(event.data.id);
+                return await this.usersService.deleteUser(event.data.id);
             }
         }
-
-        return { success: true };
     }
 }

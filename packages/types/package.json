@@ -1,0 +1,17 @@
+{
+    "name": "@reposage/types",
+    "version": "1.0.0",
+    "description": "Package to maintain the shared types among the reposage workspace",
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "scripts": {
+        "build": "tsc -p .",
+        "dev": "tsc -p . --watch"
+    },
+    "author": "Waquar Ahmad",
+    "license": "ISC",
+    "devDependencies": {
+        "typescript": "^5.9.3"
+    }
+}

@@ -5,3 +5,9 @@ export interface APIResponse<T = any> {
     data?: T;
     error?: any;
 }
+
+export interface CreateProjectDto {
+    name: string;
+    githubUrl: string;
+    githubToken?: string;
+}

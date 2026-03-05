@@ -8,6 +8,7 @@ import { QueueModule } from './queue/queue.module';
 import { MeetingsModule } from './meetings/meetings.module';
 import { BillingModule } from './billing/billing.module';
 import { UsersModule } from './users/users.module';
+import { ProjectsModule } from './projects/projects.module';
 
 @Module({
     imports: [
@@ -18,6 +19,7 @@ import { UsersModule } from './users/users.module';
         MeetingsModule,
         BillingModule,
         UsersModule,
+        ProjectsModule,
     ],
     controllers: [AppController],
     providers: [AppService],

@@ -13,7 +13,7 @@ export class MeetingsController {
         @Body('projectId') projectId: string,
         @Body('name') name: string,
         @Body('audioUrl') audioUrl: string,
-    ) {
+    ): Promise<unknown> {
         return this.meetingsService.processNewMeeting(projectId, name, audioUrl);
     }
 

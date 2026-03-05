@@ -11,7 +11,7 @@ export class MeetingsService {
         private readonly transcriptionService: TranscriptionService,
     ) {}
 
-    async processNewMeeting(projectId: string, name: string, meetingUrl: string) {
+    async processNewMeeting(projectId: string, name: string, meetingUrl: string): Promise<unknown> {
         const meeting = await this.prisma.meeting.create({
             data: {
                 projectId,

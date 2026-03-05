@@ -11,6 +11,9 @@
         "build:legacy": "npm run build --workspace=legacy-monolith",
         "install:legacy": "npm install --workspace=legacy-monolith",
         "build:all": "npm run build --workspaces",
+        "build:server": "npm run build -w @reposage/types -w @reposage/db -w server",
+        "start:server": "npm run build:server && npm run start -w server",
+        "start:server:watch": "npm run build:server && npm run start -w server --watch",
         "install:all": "npm install",
         "format": "prettier --write \"**/*.{ts,tsx,js,jsx,mjs,json,md}\"",
         "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mjs,json,md}\""

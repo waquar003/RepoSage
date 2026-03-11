@@ -11,3 +11,16 @@ export interface CreateProjectDto {
     githubUrl: string;
     githubToken?: string;
 }
+
+export type GithubSyncJob =
+    | {
+          type: 'INITIAL_INDEX';
+          projectId: string;
+          githubUrl: string;
+      }
+    | {
+          type: 'SYNC_COMMIT';
+          projectId: string;
+          githubUrl: string;
+          commitHashes: string[];
+      };

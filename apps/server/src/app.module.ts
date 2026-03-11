@@ -9,6 +9,7 @@ import { MeetingsModule } from './meetings/meetings.module';
 import { BillingModule } from './billing/billing.module';
 import { UsersModule } from './users/users.module';
 import { ProjectsModule } from './projects/projects.module';
+import { GithubModule } from './github/github.module';
 
 @Module({
     imports: [
@@ -20,6 +21,7 @@ import { ProjectsModule } from './projects/projects.module';
         BillingModule,
         UsersModule,
         ProjectsModule,
+        GithubModule,
     ],
     controllers: [AppController],
     providers: [AppService],

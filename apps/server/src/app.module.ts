@@ -8,9 +8,14 @@ import { QueueModule } from './queue/queue.module';
 import { MeetingsModule } from './meetings/meetings.module';
 import { BillingModule } from './billing/billing.module';
 import { UsersModule } from './users/users.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
     imports: [
+        ConfigModule.forRoot({
+            isGlobal: true,
+            envFilePath: '../.env',
+        }),
         StorageModule,
         TranscriptionModule,
         DatabaseModule,

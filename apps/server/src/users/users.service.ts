@@ -16,7 +16,6 @@ export class UsersService {
             console.error('No primary email found for user: ', userData);
             return;
         }
-
         await this.prisma.user.upsert({
             where: { id: userData.id },
             update: {

@@ -12,10 +12,14 @@ import type { FastifyRequest } from 'fastify';
 import { Webhook } from 'svix';
 import type { WebhookEvent } from '@clerk/backend';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('users')
 export class UsersController {
-    constructor(private readonly usersService: UsersService) {}
+    constructor(
+        private readonly usersService: UsersService,
+        private readonly configService: ConfigService,
+    ) {}
 
     @Post('webhook/user')
     @HttpCode(200)
@@ -31,8 +35,8 @@ export class UsersController {
             throw new BadRequestException('Missing svix headers or payload');
         }
 
-        const webhook = new Webhook(process.env.CLERK_WEBHOOK_SECRET!);
-
+        const secret = this.configService.getOrThrow<string>('CLERK_WEBHOOK_SECRET');
+        const webhook = new Webhook(secret);
         let event: WebhookEvent;
 
         try {

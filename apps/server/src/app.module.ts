@@ -1,3 +1,4 @@
+import { EncryptionService } from './common/services/encryption.service';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -24,6 +25,6 @@ import { GithubModule } from './github/github.module';
         GithubModule,
     ],
     controllers: [AppController],
-    providers: [AppService],
+    providers: [EncryptionService, AppService],
 })
 export class AppModule {}

@@ -15,7 +15,7 @@ import { AuthGuard } from '../common/guards/auth.guard';
 import { ResponseMessage } from '../common/decorators/response-message.decorator';
 import { GetUser } from 'src/common/decorators/get-user.decorator';
 import { PrismaService } from 'src/database/prisma/prisma.service';
-import { FastifyRequest } from 'fastify';
+import { AuthenticatedRequest } from 'src/common/types';
 
 @Controller('github')
 @UseGuards(AuthGuard)
@@ -40,7 +40,7 @@ export class GithubController {
     @ResponseMessage('received the webhook')
     async handleGithubWebhook(
         @Headers('x-hub-signature-256') signature: string,
-        @Req() req: RawBodyRequest<FastifyRequest>,
+        @Req() req: RawBodyRequest<AuthenticatedRequest>,
     ) {
         const bodyString = req.rawBody?.toString();
         if (!bodyString || !signature) throw new UnauthorizedException('Missing signature or body');

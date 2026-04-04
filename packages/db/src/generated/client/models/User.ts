@@ -43,6 +43,8 @@ export type UserMinAggregateOutputType = {
   lastName: string | null
   emailAddress: string | null
   credits: number | null
+  githubToken: string | null
+  githubTokenIv: string | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -54,6 +56,8 @@ export type UserMaxAggregateOutputType = {
   lastName: string | null
   emailAddress: string | null
   credits: number | null
+  githubToken: string | null
+  githubTokenIv: string | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -65,6 +69,8 @@ export type UserCountAggregateOutputType = {
   lastName: number
   emailAddress: number
   credits: number
+  githubToken: number
+  githubTokenIv: number
   _all: number
 }
 
@@ -86,6 +92,8 @@ export type UserMinAggregateInputType = {
   lastName?: true
   emailAddress?: true
   credits?: true
+  githubToken?: true
+  githubTokenIv?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -97,6 +105,8 @@ export type UserMaxAggregateInputType = {
   lastName?: true
   emailAddress?: true
   credits?: true
+  githubToken?: true
+  githubTokenIv?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -108,6 +118,8 @@ export type UserCountAggregateInputType = {
   lastName?: true
   emailAddress?: true
   credits?: true
+  githubToken?: true
+  githubTokenIv?: true
   _all?: true
 }
 
@@ -206,6 +218,8 @@ export type UserGroupByOutputType = {
   lastName: string | null
   emailAddress: string
   credits: number
+  githubToken: string
+  githubTokenIv: string
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -240,6 +254,8 @@ export type UserWhereInput = {
   lastName?: Prisma.StringNullableFilter<"User"> | string | null
   emailAddress?: Prisma.StringFilter<"User"> | string
   credits?: Prisma.IntFilter<"User"> | number
+  githubToken?: Prisma.StringFilter<"User"> | string
+  githubTokenIv?: Prisma.StringFilter<"User"> | string
   userToProjects?: Prisma.UserToProjectListRelationFilter
   questionsAsked?: Prisma.QuestionListRelationFilter
   Transactions?: Prisma.TransactionListRelationFilter
@@ -254,6 +270,8 @@ export type UserOrderByWithRelationInput = {
   lastName?: Prisma.SortOrderInput | Prisma.SortOrder
   emailAddress?: Prisma.SortOrder
   credits?: Prisma.SortOrder
+  githubToken?: Prisma.SortOrder
+  githubTokenIv?: Prisma.SortOrder
   userToProjects?: Prisma.UserToProjectOrderByRelationAggregateInput
   questionsAsked?: Prisma.QuestionOrderByRelationAggregateInput
   Transactions?: Prisma.TransactionOrderByRelationAggregateInput
@@ -271,6 +289,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   firstName?: Prisma.StringNullableFilter<"User"> | string | null
   lastName?: Prisma.StringNullableFilter<"User"> | string | null
   credits?: Prisma.IntFilter<"User"> | number
+  githubToken?: Prisma.StringFilter<"User"> | string
+  githubTokenIv?: Prisma.StringFilter<"User"> | string
   userToProjects?: Prisma.UserToProjectListRelationFilter
   questionsAsked?: Prisma.QuestionListRelationFilter
   Transactions?: Prisma.TransactionListRelationFilter
@@ -285,6 +305,8 @@ export type UserOrderByWithAggregationInput = {
   lastName?: Prisma.SortOrderInput | Prisma.SortOrder
   emailAddress?: Prisma.SortOrder
   credits?: Prisma.SortOrder
+  githubToken?: Prisma.SortOrder
+  githubTokenIv?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -304,6 +326,8 @@ export type UserScalarWhereWithAggregatesInput = {
   lastName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   emailAddress?: Prisma.StringWithAggregatesFilter<"User"> | string
   credits?: Prisma.IntWithAggregatesFilter<"User"> | number
+  githubToken?: Prisma.StringWithAggregatesFilter<"User"> | string
+  githubTokenIv?: Prisma.StringWithAggregatesFilter<"User"> | string
 }
 
 export type UserCreateInput = {
@@ -315,6 +339,8 @@ export type UserCreateInput = {
   lastName?: string | null
   emailAddress: string
   credits?: number
+  githubToken: string
+  githubTokenIv: string
   userToProjects?: Prisma.UserToProjectCreateNestedManyWithoutUserInput
   questionsAsked?: Prisma.QuestionCreateNestedManyWithoutUserInput
   Transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
@@ -329,6 +355,8 @@ export type UserUncheckedCreateInput = {
   lastName?: string | null
   emailAddress: string
   credits?: number
+  githubToken: string
+  githubTokenIv: string
   userToProjects?: Prisma.UserToProjectUncheckedCreateNestedManyWithoutUserInput
   questionsAsked?: Prisma.QuestionUncheckedCreateNestedManyWithoutUserInput
   Transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
@@ -343,6 +371,8 @@ export type UserUpdateInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailAddress?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
+  githubToken?: Prisma.StringFieldUpdateOperationsInput | string
+  githubTokenIv?: Prisma.StringFieldUpdateOperationsInput | string
   userToProjects?: Prisma.UserToProjectUpdateManyWithoutUserNestedInput
   questionsAsked?: Prisma.QuestionUpdateManyWithoutUserNestedInput
   Transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
@@ -357,6 +387,8 @@ export type UserUncheckedUpdateInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailAddress?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
+  githubToken?: Prisma.StringFieldUpdateOperationsInput | string
+  githubTokenIv?: Prisma.StringFieldUpdateOperationsInput | string
   userToProjects?: Prisma.UserToProjectUncheckedUpdateManyWithoutUserNestedInput
   questionsAsked?: Prisma.QuestionUncheckedUpdateManyWithoutUserNestedInput
   Transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
@@ -371,6 +403,8 @@ export type UserCreateManyInput = {
   lastName?: string | null
   emailAddress: string
   credits?: number
+  githubToken: string
+  githubTokenIv: string
 }
 
 export type UserUpdateManyMutationInput = {
@@ -382,6 +416,8 @@ export type UserUpdateManyMutationInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailAddress?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
+  githubToken?: Prisma.StringFieldUpdateOperationsInput | string
+  githubTokenIv?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -393,6 +429,8 @@ export type UserUncheckedUpdateManyInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailAddress?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
+  githubToken?: Prisma.StringFieldUpdateOperationsInput | string
+  githubTokenIv?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -404,6 +442,8 @@ export type UserCountOrderByAggregateInput = {
   lastName?: Prisma.SortOrder
   emailAddress?: Prisma.SortOrder
   credits?: Prisma.SortOrder
+  githubToken?: Prisma.SortOrder
+  githubTokenIv?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -419,6 +459,8 @@ export type UserMaxOrderByAggregateInput = {
   lastName?: Prisma.SortOrder
   emailAddress?: Prisma.SortOrder
   credits?: Prisma.SortOrder
+  githubToken?: Prisma.SortOrder
+  githubTokenIv?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -430,6 +472,8 @@ export type UserMinOrderByAggregateInput = {
   lastName?: Prisma.SortOrder
   emailAddress?: Prisma.SortOrder
   credits?: Prisma.SortOrder
+  githubToken?: Prisma.SortOrder
+  githubTokenIv?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
@@ -512,6 +556,8 @@ export type UserCreateWithoutUserToProjectsInput = {
   lastName?: string | null
   emailAddress: string
   credits?: number
+  githubToken: string
+  githubTokenIv: string
   questionsAsked?: Prisma.QuestionCreateNestedManyWithoutUserInput
   Transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
 }
@@ -525,6 +571,8 @@ export type UserUncheckedCreateWithoutUserToProjectsInput = {
   lastName?: string | null
   emailAddress: string
   credits?: number
+  githubToken: string
+  githubTokenIv: string
   questionsAsked?: Prisma.QuestionUncheckedCreateNestedManyWithoutUserInput
   Transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
 }
@@ -554,6 +602,8 @@ export type UserUpdateWithoutUserToProjectsInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailAddress?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
+  githubToken?: Prisma.StringFieldUpdateOperationsInput | string
+  githubTokenIv?: Prisma.StringFieldUpdateOperationsInput | string
   questionsAsked?: Prisma.QuestionUpdateManyWithoutUserNestedInput
   Transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
 }
@@ -567,6 +617,8 @@ export type UserUncheckedUpdateWithoutUserToProjectsInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailAddress?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
+  githubToken?: Prisma.StringFieldUpdateOperationsInput | string
+  githubTokenIv?: Prisma.StringFieldUpdateOperationsInput | string
   questionsAsked?: Prisma.QuestionUncheckedUpdateManyWithoutUserNestedInput
   Transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -580,6 +632,8 @@ export type UserCreateWithoutQuestionsAskedInput = {
   lastName?: string | null
   emailAddress: string
   credits?: number
+  githubToken: string
+  githubTokenIv: string
   userToProjects?: Prisma.UserToProjectCreateNestedManyWithoutUserInput
   Transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
 }
@@ -593,6 +647,8 @@ export type UserUncheckedCreateWithoutQuestionsAskedInput = {
   lastName?: string | null
   emailAddress: string
   credits?: number
+  githubToken: string
+  githubTokenIv: string
   userToProjects?: Prisma.UserToProjectUncheckedCreateNestedManyWithoutUserInput
   Transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
 }
@@ -622,6 +678,8 @@ export type UserUpdateWithoutQuestionsAskedInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailAddress?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
+  githubToken?: Prisma.StringFieldUpdateOperationsInput | string
+  githubTokenIv?: Prisma.StringFieldUpdateOperationsInput | string
   userToProjects?: Prisma.UserToProjectUpdateManyWithoutUserNestedInput
   Transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
 }
@@ -635,6 +693,8 @@ export type UserUncheckedUpdateWithoutQuestionsAskedInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailAddress?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
+  githubToken?: Prisma.StringFieldUpdateOperationsInput | string
+  githubTokenIv?: Prisma.StringFieldUpdateOperationsInput | string
   userToProjects?: Prisma.UserToProjectUncheckedUpdateManyWithoutUserNestedInput
   Transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -648,6 +708,8 @@ export type UserCreateWithoutTransactionsInput = {
   lastName?: string | null
   emailAddress: string
   credits?: number
+  githubToken: string
+  githubTokenIv: string
   userToProjects?: Prisma.UserToProjectCreateNestedManyWithoutUserInput
   questionsAsked?: Prisma.QuestionCreateNestedManyWithoutUserInput
 }
@@ -661,6 +723,8 @@ export type UserUncheckedCreateWithoutTransactionsInput = {
   lastName?: string | null
   emailAddress: string
   credits?: number
+  githubToken: string
+  githubTokenIv: string
   userToProjects?: Prisma.UserToProjectUncheckedCreateNestedManyWithoutUserInput
   questionsAsked?: Prisma.QuestionUncheckedCreateNestedManyWithoutUserInput
 }
@@ -690,6 +754,8 @@ export type UserUpdateWithoutTransactionsInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailAddress?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
+  githubToken?: Prisma.StringFieldUpdateOperationsInput | string
+  githubTokenIv?: Prisma.StringFieldUpdateOperationsInput | string
   userToProjects?: Prisma.UserToProjectUpdateManyWithoutUserNestedInput
   questionsAsked?: Prisma.QuestionUpdateManyWithoutUserNestedInput
 }
@@ -703,6 +769,8 @@ export type UserUncheckedUpdateWithoutTransactionsInput = {
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailAddress?: Prisma.StringFieldUpdateOperationsInput | string
   credits?: Prisma.IntFieldUpdateOperationsInput | number
+  githubToken?: Prisma.StringFieldUpdateOperationsInput | string
+  githubTokenIv?: Prisma.StringFieldUpdateOperationsInput | string
   userToProjects?: Prisma.UserToProjectUncheckedUpdateManyWithoutUserNestedInput
   questionsAsked?: Prisma.QuestionUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -765,6 +833,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   lastName?: boolean
   emailAddress?: boolean
   credits?: boolean
+  githubToken?: boolean
+  githubTokenIv?: boolean
   userToProjects?: boolean | Prisma.User$userToProjectsArgs<ExtArgs>
   questionsAsked?: boolean | Prisma.User$questionsAskedArgs<ExtArgs>
   Transactions?: boolean | Prisma.User$TransactionsArgs<ExtArgs>
@@ -780,6 +850,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   lastName?: boolean
   emailAddress?: boolean
   credits?: boolean
+  githubToken?: boolean
+  githubTokenIv?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -791,6 +863,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   lastName?: boolean
   emailAddress?: boolean
   credits?: boolean
+  githubToken?: boolean
+  githubTokenIv?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -802,9 +876,11 @@ export type UserSelectScalar = {
   lastName?: boolean
   emailAddress?: boolean
   credits?: boolean
+  githubToken?: boolean
+  githubTokenIv?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "imageUrl" | "firstName" | "lastName" | "emailAddress" | "credits", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "imageUrl" | "firstName" | "lastName" | "emailAddress" | "credits" | "githubToken" | "githubTokenIv", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   userToProjects?: boolean | Prisma.User$userToProjectsArgs<ExtArgs>
   questionsAsked?: boolean | Prisma.User$questionsAskedArgs<ExtArgs>
@@ -830,6 +906,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     lastName: string | null
     emailAddress: string
     credits: number
+    githubToken: string
+    githubTokenIv: string
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1264,6 +1342,8 @@ export interface UserFieldRefs {
   readonly lastName: Prisma.FieldRef<"User", 'String'>
   readonly emailAddress: Prisma.FieldRef<"User", 'String'>
   readonly credits: Prisma.FieldRef<"User", 'Int'>
+  readonly githubToken: Prisma.FieldRef<"User", 'String'>
+  readonly githubTokenIv: Prisma.FieldRef<"User", 'String'>
 }
     
 

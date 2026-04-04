@@ -2,37 +2,39 @@ import {
     BadRequestException,
     Injectable,
     NotFoundException,
-    OnModuleInit,
     UnauthorizedException,
 } from '@nestjs/common';
 import axios from 'axios';
-import type { Octokit } from 'octokit' with { 'resolution-mode': 'import' };
+import { Octokit } from 'octokit';
 import { PrismaService } from 'src/database/prisma/prisma.service';
 import { QueueService } from 'src/queue/queue.service';
 import { GithubGateway } from './github.gateway';
 import { Webhooks } from '@octokit/webhooks';
+import { EncryptionService } from 'src/common/services/encryption.service';
 
 @Injectable()
-export class GithubService implements OnModuleInit {
+export class GithubService {
     constructor(
         private readonly queueService: QueueService,
         private readonly prisma: PrismaService,
         private readonly githubGateway: GithubGateway,
+        private readonly encryptionService: EncryptionService,
     ) {}
 
     private webhooks = new Webhooks({
         secret: process.env.GITHUB_WEBHOOK_SECRET!,
     });
 
-    private octokit!: Octokit;
-    async onModuleInit() {
-        const { Octokit: OctokitClass } = await import('octokit');
-        this.octokit = new OctokitClass({ auth: process.env.GITHUB_TOKEN });
+    async getInstanceForUser(userId: string): Promise<Octokit> {
+        const user = await this.prisma.user.findUnique({ where: { id: userId } });
+        if (!user?.githubToken || !user.githubTokenIv) {
+            throw new BadRequestException('GitHub Personal Access Token is required');
+        }
+        const token = this.encryptionService.decrypt(user.githubToken, user.githubTokenIv);
+        return new Octokit({ auth: token });
     }
 
-    async getTargetBranch(githubUrl: string) {
-        if (!this.octokit) await this.onModuleInit();
-
+    async getTargetBranch(octokit: Octokit, githubUrl: string) {
         const parts = githubUrl.replace(/\/$/, '').split('/');
         const owner = parts[3];
         const repo = parts[4];
@@ -45,12 +47,17 @@ export class GithubService implements OnModuleInit {
             return { owner, repo, branch: parts[6] };
         }
 
-        const response = await this.octokit.rest.repos.get({ owner, repo });
-        return { owner, repo, branch: response.data.default_branch };
+        const { data } = await octokit.rest.repos.get({ owner, repo });
+        return { owner, repo, branch: data.default_branch };
     }
 
-    async getFileCount(owner: string, repo: string, branch: string): Promise<number> {
-        const { data } = await this.octokit.rest.git.getTree({
+    async getFileCount(
+        owner: string,
+        repo: string,
+        branch: string,
+        octokit: Octokit,
+    ): Promise<number> {
+        const { data } = await octokit.rest.git.getTree({
             owner,
             repo,
             tree_sha: branch,
@@ -119,5 +126,20 @@ export class GithubService implements OnModuleInit {
         this.githubGateway.notifyNewCommits(project.id, hashes);
 
         return { message: 'Notification sent to user' };
+    }
+
+    async createAutomatedWebhook(octokit: Octokit, owner: string, repo: string) {
+        const webhookUrl = `${process.env.SERVER_BASE_URL}/webhook/github`;
+        await octokit.rest.repos.createWebhook({
+            owner,
+            repo,
+            config: {
+                url: webhookUrl,
+                content_type: 'json',
+                secret: process.env.GITHUB_WEBHOOK_SECRET,
+            },
+            events: ['push'],
+            active: true,
+        });
     }
 }

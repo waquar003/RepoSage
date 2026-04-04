@@ -9,7 +9,7 @@ export interface APIResponse<T = any> {
 export interface CreateProjectDto {
     name: string;
     githubUrl: string;
-    githubToken?: string;
+    githubToken: string;
 }
 
 export type GithubSyncJob =

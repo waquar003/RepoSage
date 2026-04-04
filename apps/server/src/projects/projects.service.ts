@@ -1,10 +1,18 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateProjectDto } from '@reposage/types';
+import { EncryptionService } from 'src/common/services/encryption.service';
 import { PrismaService } from 'src/database/prisma/prisma.service';
+import { GithubService } from 'src/github/github.service';
+import { QueueService } from 'src/queue/queue.service';
 
 @Injectable()
 export class ProjectsService {
-    constructor(private readonly prisma: PrismaService) {}
+    constructor(
+        private readonly prisma: PrismaService,
+        private readonly encryptionService: EncryptionService,
+        private readonly githubService: GithubService,
+        private readonly queueService: QueueService,
+    ) {}
 
     async getAllUserProjects(userId: string) {
         return this.prisma.project.findMany({
@@ -28,8 +36,15 @@ export class ProjectsService {
     }
 
     async createProject(userId: string, dto: CreateProjectDto) {
-        // Github loading and indxign is remaining
-        // TODO: integrate the github and ai module
+        const { encryptedData, iv } = this.encryptionService.encrypt(dto.githubToken);
+        await this.prisma.user.update({
+            where: { id: userId },
+            data: { githubToken: encryptedData, githubTokenIv: iv },
+        });
+
+        const octokit = await this.githubService.getInstanceForUser(userId);
+        const { owner, repo } = await this.githubService.getTargetBranch(octokit, dto.githubUrl);
+
         const project = await this.prisma.project.create({
             data: {
                 name: dto.name,
@@ -40,6 +55,14 @@ export class ProjectsService {
                     },
                 },
             },
+        });
+
+        await this.githubService.createAutomatedWebhook(octokit, owner, repo);
+
+        await this.queueService.addGithubSyncJob({
+            type: 'INITIAL_INDEX',
+            projectId: project.id,
+            githubUrl: dto.githubUrl,
         });
 
         return project;

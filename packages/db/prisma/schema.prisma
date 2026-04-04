@@ -25,6 +25,9 @@ model User {
     
     credits Int @default(150)
 
+    githubToken String
+    githubTokenIv String
+
     userToProjects UserToProject[] 
 
     questionsAsked Question[]

@@ -6,17 +6,20 @@ import {
     HttpCode,
     Post,
     Req,
+    UseGuards,
     type RawBodyRequest,
 } from '@nestjs/common';
 import type { FastifyRequest } from 'fastify';
 import { BillingService } from './billing.service';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
+import { AuthGuard } from 'src/common/guards/auth.guard';
 
 @Controller('billing')
 export class BillingController {
     constructor(private readonly billingService: BillingService) {}
 
     @Post('checkout')
+    @UseGuards(AuthGuard)
     @HttpCode(200)
     @ResponseMessage('Checkout session generated')
     async createCheckout(

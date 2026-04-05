@@ -3,6 +3,8 @@ import { Geist, Geist_Mono, Figtree } from 'next/font/google';
 import './globals.css';
 import { ClerkProvider } from '@clerk/nextjs';
 import { cn } from '@/lib/utils';
+import QueryProvider from '@/components/providers/query-provider';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 const figtree = Figtree({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -30,7 +32,9 @@ export default function RootLayout({
         <ClerkProvider>
             <html lang="en" className={cn('font-sans', figtree.variable)}>
                 <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                    {children}
+                    <TooltipProvider>
+                        <QueryProvider>{children}</QueryProvider>
+                    </TooltipProvider>
                 </body>
             </html>
         </ClerkProvider>

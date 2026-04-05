@@ -43,4 +43,10 @@ export class UsersService {
             console.error(`Error deleting user with ID ${userId}: `, error);
         }
     }
+
+    async getUser(userId: string) {
+        return await this.prisma.user.findUnique({
+            where: { id: userId },
+        });
+    }
 }

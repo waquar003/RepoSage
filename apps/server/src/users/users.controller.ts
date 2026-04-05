@@ -6,6 +6,9 @@ import {
     Post,
     HttpCode,
     BadRequestException,
+    Get,
+    UseGuards,
+    NotFoundException,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import type { FastifyRequest } from 'fastify';
@@ -13,6 +16,8 @@ import { Webhook } from 'svix';
 import type { WebhookEvent } from '@clerk/backend';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 import { ConfigService } from '@nestjs/config';
+import { AuthGuard } from 'src/common/guards/auth.guard';
+import { AuthenticatedRequest } from 'src/common/types';
 
 @Controller('users')
 export class UsersController {
@@ -57,5 +62,17 @@ export class UsersController {
                 return await this.usersService.deleteUser(event.data.id);
             }
         }
+    }
+
+    @Get('me')
+    @UseGuards(AuthGuard)
+    async getMe(@Req() request: RawBodyRequest<AuthenticatedRequest>) {
+        const user = await this.usersService.getUser(request.userId);
+
+        if (!user) {
+            throw new NotFoundException('User not yet synchronized');
+        }
+
+        return user;
     }
 }

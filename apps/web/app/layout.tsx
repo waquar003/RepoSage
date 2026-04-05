@@ -5,6 +5,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 import { cn } from '@/lib/utils';
 import QueryProvider from '@/components/providers/query-provider';
 import { TooltipProvider } from '@/components/ui/tooltip';
+import { AxiosInterceptor } from '@/components/providers/axios-provider';
 
 const figtree = Figtree({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -33,7 +34,9 @@ export default function RootLayout({
             <html lang="en" className={cn('font-sans', figtree.variable)}>
                 <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                     <TooltipProvider>
-                        <QueryProvider>{children}</QueryProvider>
+                        <AxiosInterceptor>
+                            <QueryProvider>{children}</QueryProvider>
+                        </AxiosInterceptor>
                     </TooltipProvider>
                 </body>
             </html>

@@ -31,6 +31,8 @@ export type ProjectMinAggregateOutputType = {
   name: string | null
   githubUrl: string | null
   deletedAt: Date | null
+  geminiApiKeyId: string | null
+  transcriptionApiKeyId: string | null
 }
 
 export type ProjectMaxAggregateOutputType = {
@@ -40,6 +42,8 @@ export type ProjectMaxAggregateOutputType = {
   name: string | null
   githubUrl: string | null
   deletedAt: Date | null
+  geminiApiKeyId: string | null
+  transcriptionApiKeyId: string | null
 }
 
 export type ProjectCountAggregateOutputType = {
@@ -49,6 +53,8 @@ export type ProjectCountAggregateOutputType = {
   name: number
   githubUrl: number
   deletedAt: number
+  geminiApiKeyId: number
+  transcriptionApiKeyId: number
   _all: number
 }
 
@@ -60,6 +66,8 @@ export type ProjectMinAggregateInputType = {
   name?: true
   githubUrl?: true
   deletedAt?: true
+  geminiApiKeyId?: true
+  transcriptionApiKeyId?: true
 }
 
 export type ProjectMaxAggregateInputType = {
@@ -69,6 +77,8 @@ export type ProjectMaxAggregateInputType = {
   name?: true
   githubUrl?: true
   deletedAt?: true
+  geminiApiKeyId?: true
+  transcriptionApiKeyId?: true
 }
 
 export type ProjectCountAggregateInputType = {
@@ -78,6 +88,8 @@ export type ProjectCountAggregateInputType = {
   name?: true
   githubUrl?: true
   deletedAt?: true
+  geminiApiKeyId?: true
+  transcriptionApiKeyId?: true
   _all?: true
 }
 
@@ -160,6 +172,8 @@ export type ProjectGroupByOutputType = {
   name: string
   githubUrl: string
   deletedAt: Date | null
+  geminiApiKeyId: string | null
+  transcriptionApiKeyId: string | null
   _count: ProjectCountAggregateOutputType | null
   _min: ProjectMinAggregateOutputType | null
   _max: ProjectMaxAggregateOutputType | null
@@ -190,11 +204,15 @@ export type ProjectWhereInput = {
   name?: Prisma.StringFilter<"Project"> | string
   githubUrl?: Prisma.StringFilter<"Project"> | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
+  geminiApiKeyId?: Prisma.StringNullableFilter<"Project"> | string | null
+  transcriptionApiKeyId?: Prisma.StringNullableFilter<"Project"> | string | null
   userToProjects?: Prisma.UserToProjectListRelationFilter
   commits?: Prisma.CommitListRelationFilter
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingListRelationFilter
   savedQuestions?: Prisma.QuestionListRelationFilter
   meetings?: Prisma.MeetingListRelationFilter
+  geminiApiKey?: Prisma.XOR<Prisma.UserApiKeyNullableScalarRelationFilter, Prisma.UserApiKeyWhereInput> | null
+  transcriptionApiKey?: Prisma.XOR<Prisma.UserApiKeyNullableScalarRelationFilter, Prisma.UserApiKeyWhereInput> | null
 }
 
 export type ProjectOrderByWithRelationInput = {
@@ -204,11 +222,15 @@ export type ProjectOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   githubUrl?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  geminiApiKeyId?: Prisma.SortOrderInput | Prisma.SortOrder
+  transcriptionApiKeyId?: Prisma.SortOrderInput | Prisma.SortOrder
   userToProjects?: Prisma.UserToProjectOrderByRelationAggregateInput
   commits?: Prisma.CommitOrderByRelationAggregateInput
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingOrderByRelationAggregateInput
   savedQuestions?: Prisma.QuestionOrderByRelationAggregateInput
   meetings?: Prisma.MeetingOrderByRelationAggregateInput
+  geminiApiKey?: Prisma.UserApiKeyOrderByWithRelationInput
+  transcriptionApiKey?: Prisma.UserApiKeyOrderByWithRelationInput
 }
 
 export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -221,11 +243,15 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Project"> | string
   githubUrl?: Prisma.StringFilter<"Project"> | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
+  geminiApiKeyId?: Prisma.StringNullableFilter<"Project"> | string | null
+  transcriptionApiKeyId?: Prisma.StringNullableFilter<"Project"> | string | null
   userToProjects?: Prisma.UserToProjectListRelationFilter
   commits?: Prisma.CommitListRelationFilter
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingListRelationFilter
   savedQuestions?: Prisma.QuestionListRelationFilter
   meetings?: Prisma.MeetingListRelationFilter
+  geminiApiKey?: Prisma.XOR<Prisma.UserApiKeyNullableScalarRelationFilter, Prisma.UserApiKeyWhereInput> | null
+  transcriptionApiKey?: Prisma.XOR<Prisma.UserApiKeyNullableScalarRelationFilter, Prisma.UserApiKeyWhereInput> | null
 }, "id">
 
 export type ProjectOrderByWithAggregationInput = {
@@ -235,6 +261,8 @@ export type ProjectOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   githubUrl?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  geminiApiKeyId?: Prisma.SortOrderInput | Prisma.SortOrder
+  transcriptionApiKeyId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ProjectCountOrderByAggregateInput
   _max?: Prisma.ProjectMaxOrderByAggregateInput
   _min?: Prisma.ProjectMinOrderByAggregateInput
@@ -250,6 +278,8 @@ export type ProjectScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Project"> | string
   githubUrl?: Prisma.StringWithAggregatesFilter<"Project"> | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Project"> | Date | string | null
+  geminiApiKeyId?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
+  transcriptionApiKeyId?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
 }
 
 export type ProjectCreateInput = {
@@ -264,6 +294,8 @@ export type ProjectCreateInput = {
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingCreateNestedManyWithoutProjectInput
   savedQuestions?: Prisma.QuestionCreateNestedManyWithoutProjectInput
   meetings?: Prisma.MeetingCreateNestedManyWithoutProjectInput
+  geminiApiKey?: Prisma.UserApiKeyCreateNestedOneWithoutProjectsAsGeminiInput
+  transcriptionApiKey?: Prisma.UserApiKeyCreateNestedOneWithoutProjectsAsTranscriptionInput
 }
 
 export type ProjectUncheckedCreateInput = {
@@ -273,6 +305,8 @@ export type ProjectUncheckedCreateInput = {
   name: string
   githubUrl: string
   deletedAt?: Date | string | null
+  geminiApiKeyId?: string | null
+  transcriptionApiKeyId?: string | null
   userToProjects?: Prisma.UserToProjectUncheckedCreateNestedManyWithoutProjectInput
   commits?: Prisma.CommitUncheckedCreateNestedManyWithoutProjectInput
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUncheckedCreateNestedManyWithoutProjectInput
@@ -292,6 +326,8 @@ export type ProjectUpdateInput = {
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUpdateManyWithoutProjectNestedInput
   savedQuestions?: Prisma.QuestionUpdateManyWithoutProjectNestedInput
   meetings?: Prisma.MeetingUpdateManyWithoutProjectNestedInput
+  geminiApiKey?: Prisma.UserApiKeyUpdateOneWithoutProjectsAsGeminiNestedInput
+  transcriptionApiKey?: Prisma.UserApiKeyUpdateOneWithoutProjectsAsTranscriptionNestedInput
 }
 
 export type ProjectUncheckedUpdateInput = {
@@ -301,6 +337,8 @@ export type ProjectUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   githubUrl?: Prisma.StringFieldUpdateOperationsInput | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  geminiApiKeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transcriptionApiKeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userToProjects?: Prisma.UserToProjectUncheckedUpdateManyWithoutProjectNestedInput
   commits?: Prisma.CommitUncheckedUpdateManyWithoutProjectNestedInput
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUncheckedUpdateManyWithoutProjectNestedInput
@@ -315,6 +353,8 @@ export type ProjectCreateManyInput = {
   name: string
   githubUrl: string
   deletedAt?: Date | string | null
+  geminiApiKeyId?: string | null
+  transcriptionApiKeyId?: string | null
 }
 
 export type ProjectUpdateManyMutationInput = {
@@ -333,6 +373,8 @@ export type ProjectUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   githubUrl?: Prisma.StringFieldUpdateOperationsInput | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  geminiApiKeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transcriptionApiKeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ProjectCountOrderByAggregateInput = {
@@ -342,6 +384,8 @@ export type ProjectCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   githubUrl?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  geminiApiKeyId?: Prisma.SortOrder
+  transcriptionApiKeyId?: Prisma.SortOrder
 }
 
 export type ProjectMaxOrderByAggregateInput = {
@@ -351,6 +395,8 @@ export type ProjectMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   githubUrl?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  geminiApiKeyId?: Prisma.SortOrder
+  transcriptionApiKeyId?: Prisma.SortOrder
 }
 
 export type ProjectMinOrderByAggregateInput = {
@@ -360,11 +406,23 @@ export type ProjectMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   githubUrl?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  geminiApiKeyId?: Prisma.SortOrder
+  transcriptionApiKeyId?: Prisma.SortOrder
 }
 
 export type ProjectScalarRelationFilter = {
   is?: Prisma.ProjectWhereInput
   isNot?: Prisma.ProjectWhereInput
+}
+
+export type ProjectListRelationFilter = {
+  every?: Prisma.ProjectWhereInput
+  some?: Prisma.ProjectWhereInput
+  none?: Prisma.ProjectWhereInput
+}
+
+export type ProjectOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -441,6 +499,90 @@ export type ProjectUpdateOneRequiredWithoutMeetingsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutMeetingsInput, Prisma.ProjectUpdateWithoutMeetingsInput>, Prisma.ProjectUncheckedUpdateWithoutMeetingsInput>
 }
 
+export type ProjectCreateNestedManyWithoutGeminiApiKeyInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutGeminiApiKeyInput, Prisma.ProjectUncheckedCreateWithoutGeminiApiKeyInput> | Prisma.ProjectCreateWithoutGeminiApiKeyInput[] | Prisma.ProjectUncheckedCreateWithoutGeminiApiKeyInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutGeminiApiKeyInput | Prisma.ProjectCreateOrConnectWithoutGeminiApiKeyInput[]
+  createMany?: Prisma.ProjectCreateManyGeminiApiKeyInputEnvelope
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+}
+
+export type ProjectCreateNestedManyWithoutTranscriptionApiKeyInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutTranscriptionApiKeyInput, Prisma.ProjectUncheckedCreateWithoutTranscriptionApiKeyInput> | Prisma.ProjectCreateWithoutTranscriptionApiKeyInput[] | Prisma.ProjectUncheckedCreateWithoutTranscriptionApiKeyInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutTranscriptionApiKeyInput | Prisma.ProjectCreateOrConnectWithoutTranscriptionApiKeyInput[]
+  createMany?: Prisma.ProjectCreateManyTranscriptionApiKeyInputEnvelope
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+}
+
+export type ProjectUncheckedCreateNestedManyWithoutGeminiApiKeyInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutGeminiApiKeyInput, Prisma.ProjectUncheckedCreateWithoutGeminiApiKeyInput> | Prisma.ProjectCreateWithoutGeminiApiKeyInput[] | Prisma.ProjectUncheckedCreateWithoutGeminiApiKeyInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutGeminiApiKeyInput | Prisma.ProjectCreateOrConnectWithoutGeminiApiKeyInput[]
+  createMany?: Prisma.ProjectCreateManyGeminiApiKeyInputEnvelope
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+}
+
+export type ProjectUncheckedCreateNestedManyWithoutTranscriptionApiKeyInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutTranscriptionApiKeyInput, Prisma.ProjectUncheckedCreateWithoutTranscriptionApiKeyInput> | Prisma.ProjectCreateWithoutTranscriptionApiKeyInput[] | Prisma.ProjectUncheckedCreateWithoutTranscriptionApiKeyInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutTranscriptionApiKeyInput | Prisma.ProjectCreateOrConnectWithoutTranscriptionApiKeyInput[]
+  createMany?: Prisma.ProjectCreateManyTranscriptionApiKeyInputEnvelope
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+}
+
+export type ProjectUpdateManyWithoutGeminiApiKeyNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutGeminiApiKeyInput, Prisma.ProjectUncheckedCreateWithoutGeminiApiKeyInput> | Prisma.ProjectCreateWithoutGeminiApiKeyInput[] | Prisma.ProjectUncheckedCreateWithoutGeminiApiKeyInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutGeminiApiKeyInput | Prisma.ProjectCreateOrConnectWithoutGeminiApiKeyInput[]
+  upsert?: Prisma.ProjectUpsertWithWhereUniqueWithoutGeminiApiKeyInput | Prisma.ProjectUpsertWithWhereUniqueWithoutGeminiApiKeyInput[]
+  createMany?: Prisma.ProjectCreateManyGeminiApiKeyInputEnvelope
+  set?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  disconnect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  delete?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  update?: Prisma.ProjectUpdateWithWhereUniqueWithoutGeminiApiKeyInput | Prisma.ProjectUpdateWithWhereUniqueWithoutGeminiApiKeyInput[]
+  updateMany?: Prisma.ProjectUpdateManyWithWhereWithoutGeminiApiKeyInput | Prisma.ProjectUpdateManyWithWhereWithoutGeminiApiKeyInput[]
+  deleteMany?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
+}
+
+export type ProjectUpdateManyWithoutTranscriptionApiKeyNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutTranscriptionApiKeyInput, Prisma.ProjectUncheckedCreateWithoutTranscriptionApiKeyInput> | Prisma.ProjectCreateWithoutTranscriptionApiKeyInput[] | Prisma.ProjectUncheckedCreateWithoutTranscriptionApiKeyInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutTranscriptionApiKeyInput | Prisma.ProjectCreateOrConnectWithoutTranscriptionApiKeyInput[]
+  upsert?: Prisma.ProjectUpsertWithWhereUniqueWithoutTranscriptionApiKeyInput | Prisma.ProjectUpsertWithWhereUniqueWithoutTranscriptionApiKeyInput[]
+  createMany?: Prisma.ProjectCreateManyTranscriptionApiKeyInputEnvelope
+  set?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  disconnect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  delete?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  update?: Prisma.ProjectUpdateWithWhereUniqueWithoutTranscriptionApiKeyInput | Prisma.ProjectUpdateWithWhereUniqueWithoutTranscriptionApiKeyInput[]
+  updateMany?: Prisma.ProjectUpdateManyWithWhereWithoutTranscriptionApiKeyInput | Prisma.ProjectUpdateManyWithWhereWithoutTranscriptionApiKeyInput[]
+  deleteMany?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
+}
+
+export type ProjectUncheckedUpdateManyWithoutGeminiApiKeyNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutGeminiApiKeyInput, Prisma.ProjectUncheckedCreateWithoutGeminiApiKeyInput> | Prisma.ProjectCreateWithoutGeminiApiKeyInput[] | Prisma.ProjectUncheckedCreateWithoutGeminiApiKeyInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutGeminiApiKeyInput | Prisma.ProjectCreateOrConnectWithoutGeminiApiKeyInput[]
+  upsert?: Prisma.ProjectUpsertWithWhereUniqueWithoutGeminiApiKeyInput | Prisma.ProjectUpsertWithWhereUniqueWithoutGeminiApiKeyInput[]
+  createMany?: Prisma.ProjectCreateManyGeminiApiKeyInputEnvelope
+  set?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  disconnect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  delete?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  update?: Prisma.ProjectUpdateWithWhereUniqueWithoutGeminiApiKeyInput | Prisma.ProjectUpdateWithWhereUniqueWithoutGeminiApiKeyInput[]
+  updateMany?: Prisma.ProjectUpdateManyWithWhereWithoutGeminiApiKeyInput | Prisma.ProjectUpdateManyWithWhereWithoutGeminiApiKeyInput[]
+  deleteMany?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
+}
+
+export type ProjectUncheckedUpdateManyWithoutTranscriptionApiKeyNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutTranscriptionApiKeyInput, Prisma.ProjectUncheckedCreateWithoutTranscriptionApiKeyInput> | Prisma.ProjectCreateWithoutTranscriptionApiKeyInput[] | Prisma.ProjectUncheckedCreateWithoutTranscriptionApiKeyInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutTranscriptionApiKeyInput | Prisma.ProjectCreateOrConnectWithoutTranscriptionApiKeyInput[]
+  upsert?: Prisma.ProjectUpsertWithWhereUniqueWithoutTranscriptionApiKeyInput | Prisma.ProjectUpsertWithWhereUniqueWithoutTranscriptionApiKeyInput[]
+  createMany?: Prisma.ProjectCreateManyTranscriptionApiKeyInputEnvelope
+  set?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  disconnect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  delete?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  update?: Prisma.ProjectUpdateWithWhereUniqueWithoutTranscriptionApiKeyInput | Prisma.ProjectUpdateWithWhereUniqueWithoutTranscriptionApiKeyInput[]
+  updateMany?: Prisma.ProjectUpdateManyWithWhereWithoutTranscriptionApiKeyInput | Prisma.ProjectUpdateManyWithWhereWithoutTranscriptionApiKeyInput[]
+  deleteMany?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
+}
+
 export type ProjectCreateWithoutUserToProjectsInput = {
   id?: string
   createdAt?: Date | string
@@ -452,6 +594,8 @@ export type ProjectCreateWithoutUserToProjectsInput = {
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingCreateNestedManyWithoutProjectInput
   savedQuestions?: Prisma.QuestionCreateNestedManyWithoutProjectInput
   meetings?: Prisma.MeetingCreateNestedManyWithoutProjectInput
+  geminiApiKey?: Prisma.UserApiKeyCreateNestedOneWithoutProjectsAsGeminiInput
+  transcriptionApiKey?: Prisma.UserApiKeyCreateNestedOneWithoutProjectsAsTranscriptionInput
 }
 
 export type ProjectUncheckedCreateWithoutUserToProjectsInput = {
@@ -461,6 +605,8 @@ export type ProjectUncheckedCreateWithoutUserToProjectsInput = {
   name: string
   githubUrl: string
   deletedAt?: Date | string | null
+  geminiApiKeyId?: string | null
+  transcriptionApiKeyId?: string | null
   commits?: Prisma.CommitUncheckedCreateNestedManyWithoutProjectInput
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUncheckedCreateNestedManyWithoutProjectInput
   savedQuestions?: Prisma.QuestionUncheckedCreateNestedManyWithoutProjectInput
@@ -494,6 +640,8 @@ export type ProjectUpdateWithoutUserToProjectsInput = {
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUpdateManyWithoutProjectNestedInput
   savedQuestions?: Prisma.QuestionUpdateManyWithoutProjectNestedInput
   meetings?: Prisma.MeetingUpdateManyWithoutProjectNestedInput
+  geminiApiKey?: Prisma.UserApiKeyUpdateOneWithoutProjectsAsGeminiNestedInput
+  transcriptionApiKey?: Prisma.UserApiKeyUpdateOneWithoutProjectsAsTranscriptionNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutUserToProjectsInput = {
@@ -503,6 +651,8 @@ export type ProjectUncheckedUpdateWithoutUserToProjectsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   githubUrl?: Prisma.StringFieldUpdateOperationsInput | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  geminiApiKeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transcriptionApiKeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commits?: Prisma.CommitUncheckedUpdateManyWithoutProjectNestedInput
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUncheckedUpdateManyWithoutProjectNestedInput
   savedQuestions?: Prisma.QuestionUncheckedUpdateManyWithoutProjectNestedInput
@@ -520,6 +670,8 @@ export type ProjectCreateWithoutCommitsInput = {
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingCreateNestedManyWithoutProjectInput
   savedQuestions?: Prisma.QuestionCreateNestedManyWithoutProjectInput
   meetings?: Prisma.MeetingCreateNestedManyWithoutProjectInput
+  geminiApiKey?: Prisma.UserApiKeyCreateNestedOneWithoutProjectsAsGeminiInput
+  transcriptionApiKey?: Prisma.UserApiKeyCreateNestedOneWithoutProjectsAsTranscriptionInput
 }
 
 export type ProjectUncheckedCreateWithoutCommitsInput = {
@@ -529,6 +681,8 @@ export type ProjectUncheckedCreateWithoutCommitsInput = {
   name: string
   githubUrl: string
   deletedAt?: Date | string | null
+  geminiApiKeyId?: string | null
+  transcriptionApiKeyId?: string | null
   userToProjects?: Prisma.UserToProjectUncheckedCreateNestedManyWithoutProjectInput
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUncheckedCreateNestedManyWithoutProjectInput
   savedQuestions?: Prisma.QuestionUncheckedCreateNestedManyWithoutProjectInput
@@ -562,6 +716,8 @@ export type ProjectUpdateWithoutCommitsInput = {
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUpdateManyWithoutProjectNestedInput
   savedQuestions?: Prisma.QuestionUpdateManyWithoutProjectNestedInput
   meetings?: Prisma.MeetingUpdateManyWithoutProjectNestedInput
+  geminiApiKey?: Prisma.UserApiKeyUpdateOneWithoutProjectsAsGeminiNestedInput
+  transcriptionApiKey?: Prisma.UserApiKeyUpdateOneWithoutProjectsAsTranscriptionNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutCommitsInput = {
@@ -571,6 +727,8 @@ export type ProjectUncheckedUpdateWithoutCommitsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   githubUrl?: Prisma.StringFieldUpdateOperationsInput | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  geminiApiKeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transcriptionApiKeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userToProjects?: Prisma.UserToProjectUncheckedUpdateManyWithoutProjectNestedInput
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUncheckedUpdateManyWithoutProjectNestedInput
   savedQuestions?: Prisma.QuestionUncheckedUpdateManyWithoutProjectNestedInput
@@ -588,6 +746,8 @@ export type ProjectCreateWithoutSourceCodeEmbeddingsInput = {
   commits?: Prisma.CommitCreateNestedManyWithoutProjectInput
   savedQuestions?: Prisma.QuestionCreateNestedManyWithoutProjectInput
   meetings?: Prisma.MeetingCreateNestedManyWithoutProjectInput
+  geminiApiKey?: Prisma.UserApiKeyCreateNestedOneWithoutProjectsAsGeminiInput
+  transcriptionApiKey?: Prisma.UserApiKeyCreateNestedOneWithoutProjectsAsTranscriptionInput
 }
 
 export type ProjectUncheckedCreateWithoutSourceCodeEmbeddingsInput = {
@@ -597,6 +757,8 @@ export type ProjectUncheckedCreateWithoutSourceCodeEmbeddingsInput = {
   name: string
   githubUrl: string
   deletedAt?: Date | string | null
+  geminiApiKeyId?: string | null
+  transcriptionApiKeyId?: string | null
   userToProjects?: Prisma.UserToProjectUncheckedCreateNestedManyWithoutProjectInput
   commits?: Prisma.CommitUncheckedCreateNestedManyWithoutProjectInput
   savedQuestions?: Prisma.QuestionUncheckedCreateNestedManyWithoutProjectInput
@@ -630,6 +792,8 @@ export type ProjectUpdateWithoutSourceCodeEmbeddingsInput = {
   commits?: Prisma.CommitUpdateManyWithoutProjectNestedInput
   savedQuestions?: Prisma.QuestionUpdateManyWithoutProjectNestedInput
   meetings?: Prisma.MeetingUpdateManyWithoutProjectNestedInput
+  geminiApiKey?: Prisma.UserApiKeyUpdateOneWithoutProjectsAsGeminiNestedInput
+  transcriptionApiKey?: Prisma.UserApiKeyUpdateOneWithoutProjectsAsTranscriptionNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutSourceCodeEmbeddingsInput = {
@@ -639,6 +803,8 @@ export type ProjectUncheckedUpdateWithoutSourceCodeEmbeddingsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   githubUrl?: Prisma.StringFieldUpdateOperationsInput | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  geminiApiKeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transcriptionApiKeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userToProjects?: Prisma.UserToProjectUncheckedUpdateManyWithoutProjectNestedInput
   commits?: Prisma.CommitUncheckedUpdateManyWithoutProjectNestedInput
   savedQuestions?: Prisma.QuestionUncheckedUpdateManyWithoutProjectNestedInput
@@ -656,6 +822,8 @@ export type ProjectCreateWithoutSavedQuestionsInput = {
   commits?: Prisma.CommitCreateNestedManyWithoutProjectInput
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingCreateNestedManyWithoutProjectInput
   meetings?: Prisma.MeetingCreateNestedManyWithoutProjectInput
+  geminiApiKey?: Prisma.UserApiKeyCreateNestedOneWithoutProjectsAsGeminiInput
+  transcriptionApiKey?: Prisma.UserApiKeyCreateNestedOneWithoutProjectsAsTranscriptionInput
 }
 
 export type ProjectUncheckedCreateWithoutSavedQuestionsInput = {
@@ -665,6 +833,8 @@ export type ProjectUncheckedCreateWithoutSavedQuestionsInput = {
   name: string
   githubUrl: string
   deletedAt?: Date | string | null
+  geminiApiKeyId?: string | null
+  transcriptionApiKeyId?: string | null
   userToProjects?: Prisma.UserToProjectUncheckedCreateNestedManyWithoutProjectInput
   commits?: Prisma.CommitUncheckedCreateNestedManyWithoutProjectInput
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUncheckedCreateNestedManyWithoutProjectInput
@@ -698,6 +868,8 @@ export type ProjectUpdateWithoutSavedQuestionsInput = {
   commits?: Prisma.CommitUpdateManyWithoutProjectNestedInput
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUpdateManyWithoutProjectNestedInput
   meetings?: Prisma.MeetingUpdateManyWithoutProjectNestedInput
+  geminiApiKey?: Prisma.UserApiKeyUpdateOneWithoutProjectsAsGeminiNestedInput
+  transcriptionApiKey?: Prisma.UserApiKeyUpdateOneWithoutProjectsAsTranscriptionNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutSavedQuestionsInput = {
@@ -707,6 +879,8 @@ export type ProjectUncheckedUpdateWithoutSavedQuestionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   githubUrl?: Prisma.StringFieldUpdateOperationsInput | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  geminiApiKeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transcriptionApiKeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userToProjects?: Prisma.UserToProjectUncheckedUpdateManyWithoutProjectNestedInput
   commits?: Prisma.CommitUncheckedUpdateManyWithoutProjectNestedInput
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUncheckedUpdateManyWithoutProjectNestedInput
@@ -724,6 +898,8 @@ export type ProjectCreateWithoutMeetingsInput = {
   commits?: Prisma.CommitCreateNestedManyWithoutProjectInput
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingCreateNestedManyWithoutProjectInput
   savedQuestions?: Prisma.QuestionCreateNestedManyWithoutProjectInput
+  geminiApiKey?: Prisma.UserApiKeyCreateNestedOneWithoutProjectsAsGeminiInput
+  transcriptionApiKey?: Prisma.UserApiKeyCreateNestedOneWithoutProjectsAsTranscriptionInput
 }
 
 export type ProjectUncheckedCreateWithoutMeetingsInput = {
@@ -733,6 +909,8 @@ export type ProjectUncheckedCreateWithoutMeetingsInput = {
   name: string
   githubUrl: string
   deletedAt?: Date | string | null
+  geminiApiKeyId?: string | null
+  transcriptionApiKeyId?: string | null
   userToProjects?: Prisma.UserToProjectUncheckedCreateNestedManyWithoutProjectInput
   commits?: Prisma.CommitUncheckedCreateNestedManyWithoutProjectInput
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUncheckedCreateNestedManyWithoutProjectInput
@@ -766,6 +944,8 @@ export type ProjectUpdateWithoutMeetingsInput = {
   commits?: Prisma.CommitUpdateManyWithoutProjectNestedInput
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUpdateManyWithoutProjectNestedInput
   savedQuestions?: Prisma.QuestionUpdateManyWithoutProjectNestedInput
+  geminiApiKey?: Prisma.UserApiKeyUpdateOneWithoutProjectsAsGeminiNestedInput
+  transcriptionApiKey?: Prisma.UserApiKeyUpdateOneWithoutProjectsAsTranscriptionNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutMeetingsInput = {
@@ -775,10 +955,238 @@ export type ProjectUncheckedUpdateWithoutMeetingsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   githubUrl?: Prisma.StringFieldUpdateOperationsInput | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  geminiApiKeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transcriptionApiKeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userToProjects?: Prisma.UserToProjectUncheckedUpdateManyWithoutProjectNestedInput
   commits?: Prisma.CommitUncheckedUpdateManyWithoutProjectNestedInput
   sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUncheckedUpdateManyWithoutProjectNestedInput
   savedQuestions?: Prisma.QuestionUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutGeminiApiKeyInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  githubUrl: string
+  deletedAt?: Date | string | null
+  userToProjects?: Prisma.UserToProjectCreateNestedManyWithoutProjectInput
+  commits?: Prisma.CommitCreateNestedManyWithoutProjectInput
+  sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingCreateNestedManyWithoutProjectInput
+  savedQuestions?: Prisma.QuestionCreateNestedManyWithoutProjectInput
+  meetings?: Prisma.MeetingCreateNestedManyWithoutProjectInput
+  transcriptionApiKey?: Prisma.UserApiKeyCreateNestedOneWithoutProjectsAsTranscriptionInput
+}
+
+export type ProjectUncheckedCreateWithoutGeminiApiKeyInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  githubUrl: string
+  deletedAt?: Date | string | null
+  transcriptionApiKeyId?: string | null
+  userToProjects?: Prisma.UserToProjectUncheckedCreateNestedManyWithoutProjectInput
+  commits?: Prisma.CommitUncheckedCreateNestedManyWithoutProjectInput
+  sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUncheckedCreateNestedManyWithoutProjectInput
+  savedQuestions?: Prisma.QuestionUncheckedCreateNestedManyWithoutProjectInput
+  meetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutGeminiApiKeyInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutGeminiApiKeyInput, Prisma.ProjectUncheckedCreateWithoutGeminiApiKeyInput>
+}
+
+export type ProjectCreateManyGeminiApiKeyInputEnvelope = {
+  data: Prisma.ProjectCreateManyGeminiApiKeyInput | Prisma.ProjectCreateManyGeminiApiKeyInput[]
+  skipDuplicates?: boolean
+}
+
+export type ProjectCreateWithoutTranscriptionApiKeyInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  githubUrl: string
+  deletedAt?: Date | string | null
+  userToProjects?: Prisma.UserToProjectCreateNestedManyWithoutProjectInput
+  commits?: Prisma.CommitCreateNestedManyWithoutProjectInput
+  sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingCreateNestedManyWithoutProjectInput
+  savedQuestions?: Prisma.QuestionCreateNestedManyWithoutProjectInput
+  meetings?: Prisma.MeetingCreateNestedManyWithoutProjectInput
+  geminiApiKey?: Prisma.UserApiKeyCreateNestedOneWithoutProjectsAsGeminiInput
+}
+
+export type ProjectUncheckedCreateWithoutTranscriptionApiKeyInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  githubUrl: string
+  deletedAt?: Date | string | null
+  geminiApiKeyId?: string | null
+  userToProjects?: Prisma.UserToProjectUncheckedCreateNestedManyWithoutProjectInput
+  commits?: Prisma.CommitUncheckedCreateNestedManyWithoutProjectInput
+  sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUncheckedCreateNestedManyWithoutProjectInput
+  savedQuestions?: Prisma.QuestionUncheckedCreateNestedManyWithoutProjectInput
+  meetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutTranscriptionApiKeyInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutTranscriptionApiKeyInput, Prisma.ProjectUncheckedCreateWithoutTranscriptionApiKeyInput>
+}
+
+export type ProjectCreateManyTranscriptionApiKeyInputEnvelope = {
+  data: Prisma.ProjectCreateManyTranscriptionApiKeyInput | Prisma.ProjectCreateManyTranscriptionApiKeyInput[]
+  skipDuplicates?: boolean
+}
+
+export type ProjectUpsertWithWhereUniqueWithoutGeminiApiKeyInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutGeminiApiKeyInput, Prisma.ProjectUncheckedUpdateWithoutGeminiApiKeyInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutGeminiApiKeyInput, Prisma.ProjectUncheckedCreateWithoutGeminiApiKeyInput>
+}
+
+export type ProjectUpdateWithWhereUniqueWithoutGeminiApiKeyInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutGeminiApiKeyInput, Prisma.ProjectUncheckedUpdateWithoutGeminiApiKeyInput>
+}
+
+export type ProjectUpdateManyWithWhereWithoutGeminiApiKeyInput = {
+  where: Prisma.ProjectScalarWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateManyMutationInput, Prisma.ProjectUncheckedUpdateManyWithoutGeminiApiKeyInput>
+}
+
+export type ProjectScalarWhereInput = {
+  AND?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
+  OR?: Prisma.ProjectScalarWhereInput[]
+  NOT?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
+  id?: Prisma.StringFilter<"Project"> | string
+  createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
+  name?: Prisma.StringFilter<"Project"> | string
+  githubUrl?: Prisma.StringFilter<"Project"> | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
+  geminiApiKeyId?: Prisma.StringNullableFilter<"Project"> | string | null
+  transcriptionApiKeyId?: Prisma.StringNullableFilter<"Project"> | string | null
+}
+
+export type ProjectUpsertWithWhereUniqueWithoutTranscriptionApiKeyInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutTranscriptionApiKeyInput, Prisma.ProjectUncheckedUpdateWithoutTranscriptionApiKeyInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutTranscriptionApiKeyInput, Prisma.ProjectUncheckedCreateWithoutTranscriptionApiKeyInput>
+}
+
+export type ProjectUpdateWithWhereUniqueWithoutTranscriptionApiKeyInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutTranscriptionApiKeyInput, Prisma.ProjectUncheckedUpdateWithoutTranscriptionApiKeyInput>
+}
+
+export type ProjectUpdateManyWithWhereWithoutTranscriptionApiKeyInput = {
+  where: Prisma.ProjectScalarWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateManyMutationInput, Prisma.ProjectUncheckedUpdateManyWithoutTranscriptionApiKeyInput>
+}
+
+export type ProjectCreateManyGeminiApiKeyInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  githubUrl: string
+  deletedAt?: Date | string | null
+  transcriptionApiKeyId?: string | null
+}
+
+export type ProjectCreateManyTranscriptionApiKeyInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+  githubUrl: string
+  deletedAt?: Date | string | null
+  geminiApiKeyId?: string | null
+}
+
+export type ProjectUpdateWithoutGeminiApiKeyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  githubUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userToProjects?: Prisma.UserToProjectUpdateManyWithoutProjectNestedInput
+  commits?: Prisma.CommitUpdateManyWithoutProjectNestedInput
+  sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUpdateManyWithoutProjectNestedInput
+  savedQuestions?: Prisma.QuestionUpdateManyWithoutProjectNestedInput
+  meetings?: Prisma.MeetingUpdateManyWithoutProjectNestedInput
+  transcriptionApiKey?: Prisma.UserApiKeyUpdateOneWithoutProjectsAsTranscriptionNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutGeminiApiKeyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  githubUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  transcriptionApiKeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userToProjects?: Prisma.UserToProjectUncheckedUpdateManyWithoutProjectNestedInput
+  commits?: Prisma.CommitUncheckedUpdateManyWithoutProjectNestedInput
+  sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUncheckedUpdateManyWithoutProjectNestedInput
+  savedQuestions?: Prisma.QuestionUncheckedUpdateManyWithoutProjectNestedInput
+  meetings?: Prisma.MeetingUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateManyWithoutGeminiApiKeyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  githubUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  transcriptionApiKeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type ProjectUpdateWithoutTranscriptionApiKeyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  githubUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userToProjects?: Prisma.UserToProjectUpdateManyWithoutProjectNestedInput
+  commits?: Prisma.CommitUpdateManyWithoutProjectNestedInput
+  sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUpdateManyWithoutProjectNestedInput
+  savedQuestions?: Prisma.QuestionUpdateManyWithoutProjectNestedInput
+  meetings?: Prisma.MeetingUpdateManyWithoutProjectNestedInput
+  geminiApiKey?: Prisma.UserApiKeyUpdateOneWithoutProjectsAsGeminiNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutTranscriptionApiKeyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  githubUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  geminiApiKeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userToProjects?: Prisma.UserToProjectUncheckedUpdateManyWithoutProjectNestedInput
+  commits?: Prisma.CommitUncheckedUpdateManyWithoutProjectNestedInput
+  sourceCodeEmbeddings?: Prisma.SourceCodeEmbeddingUncheckedUpdateManyWithoutProjectNestedInput
+  savedQuestions?: Prisma.QuestionUncheckedUpdateManyWithoutProjectNestedInput
+  meetings?: Prisma.MeetingUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateManyWithoutTranscriptionApiKeyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  githubUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  geminiApiKeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -855,11 +1263,15 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   name?: boolean
   githubUrl?: boolean
   deletedAt?: boolean
+  geminiApiKeyId?: boolean
+  transcriptionApiKeyId?: boolean
   userToProjects?: boolean | Prisma.Project$userToProjectsArgs<ExtArgs>
   commits?: boolean | Prisma.Project$commitsArgs<ExtArgs>
   sourceCodeEmbeddings?: boolean | Prisma.Project$sourceCodeEmbeddingsArgs<ExtArgs>
   savedQuestions?: boolean | Prisma.Project$savedQuestionsArgs<ExtArgs>
   meetings?: boolean | Prisma.Project$meetingsArgs<ExtArgs>
+  geminiApiKey?: boolean | Prisma.Project$geminiApiKeyArgs<ExtArgs>
+  transcriptionApiKey?: boolean | Prisma.Project$transcriptionApiKeyArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -870,6 +1282,10 @@ export type ProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   name?: boolean
   githubUrl?: boolean
   deletedAt?: boolean
+  geminiApiKeyId?: boolean
+  transcriptionApiKeyId?: boolean
+  geminiApiKey?: boolean | Prisma.Project$geminiApiKeyArgs<ExtArgs>
+  transcriptionApiKey?: boolean | Prisma.Project$transcriptionApiKeyArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
 export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -879,6 +1295,10 @@ export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   name?: boolean
   githubUrl?: boolean
   deletedAt?: boolean
+  geminiApiKeyId?: boolean
+  transcriptionApiKeyId?: boolean
+  geminiApiKey?: boolean | Prisma.Project$geminiApiKeyArgs<ExtArgs>
+  transcriptionApiKey?: boolean | Prisma.Project$transcriptionApiKeyArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
 export type ProjectSelectScalar = {
@@ -888,19 +1308,29 @@ export type ProjectSelectScalar = {
   name?: boolean
   githubUrl?: boolean
   deletedAt?: boolean
+  geminiApiKeyId?: boolean
+  transcriptionApiKeyId?: boolean
 }
 
-export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "name" | "githubUrl" | "deletedAt", ExtArgs["result"]["project"]>
+export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "name" | "githubUrl" | "deletedAt" | "geminiApiKeyId" | "transcriptionApiKeyId", ExtArgs["result"]["project"]>
 export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   userToProjects?: boolean | Prisma.Project$userToProjectsArgs<ExtArgs>
   commits?: boolean | Prisma.Project$commitsArgs<ExtArgs>
   sourceCodeEmbeddings?: boolean | Prisma.Project$sourceCodeEmbeddingsArgs<ExtArgs>
   savedQuestions?: boolean | Prisma.Project$savedQuestionsArgs<ExtArgs>
   meetings?: boolean | Prisma.Project$meetingsArgs<ExtArgs>
+  geminiApiKey?: boolean | Prisma.Project$geminiApiKeyArgs<ExtArgs>
+  transcriptionApiKey?: boolean | Prisma.Project$transcriptionApiKeyArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type ProjectIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  geminiApiKey?: boolean | Prisma.Project$geminiApiKeyArgs<ExtArgs>
+  transcriptionApiKey?: boolean | Prisma.Project$transcriptionApiKeyArgs<ExtArgs>
+}
+export type ProjectIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  geminiApiKey?: boolean | Prisma.Project$geminiApiKeyArgs<ExtArgs>
+  transcriptionApiKey?: boolean | Prisma.Project$transcriptionApiKeyArgs<ExtArgs>
+}
 
 export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Project"
@@ -910,6 +1340,8 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     sourceCodeEmbeddings: Prisma.$SourceCodeEmbeddingPayload<ExtArgs>[]
     savedQuestions: Prisma.$QuestionPayload<ExtArgs>[]
     meetings: Prisma.$MeetingPayload<ExtArgs>[]
+    geminiApiKey: Prisma.$UserApiKeyPayload<ExtArgs> | null
+    transcriptionApiKey: Prisma.$UserApiKeyPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -918,6 +1350,8 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     name: string
     githubUrl: string
     deletedAt: Date | null
+    geminiApiKeyId: string | null
+    transcriptionApiKeyId: string | null
   }, ExtArgs["result"]["project"]>
   composites: {}
 }
@@ -1317,6 +1751,8 @@ export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.
   sourceCodeEmbeddings<T extends Prisma.Project$sourceCodeEmbeddingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$sourceCodeEmbeddingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SourceCodeEmbeddingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   savedQuestions<T extends Prisma.Project$savedQuestionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$savedQuestionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   meetings<T extends Prisma.Project$meetingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$meetingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MeetingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  geminiApiKey<T extends Prisma.Project$geminiApiKeyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$geminiApiKeyArgs<ExtArgs>>): Prisma.Prisma__UserApiKeyClient<runtime.Types.Result.GetResult<Prisma.$UserApiKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  transcriptionApiKey<T extends Prisma.Project$transcriptionApiKeyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$transcriptionApiKeyArgs<ExtArgs>>): Prisma.Prisma__UserApiKeyClient<runtime.Types.Result.GetResult<Prisma.$UserApiKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1352,6 +1788,8 @@ export interface ProjectFieldRefs {
   readonly name: Prisma.FieldRef<"Project", 'String'>
   readonly githubUrl: Prisma.FieldRef<"Project", 'String'>
   readonly deletedAt: Prisma.FieldRef<"Project", 'DateTime'>
+  readonly geminiApiKeyId: Prisma.FieldRef<"Project", 'String'>
+  readonly transcriptionApiKeyId: Prisma.FieldRef<"Project", 'String'>
 }
     
 
@@ -1601,6 +2039,10 @@ export type ProjectCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensi
    */
   data: Prisma.ProjectCreateManyInput | Prisma.ProjectCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1671,6 +2113,10 @@ export type ProjectUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensi
    * Limit how many Projects to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1857,6 +2303,44 @@ export type Project$meetingsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.MeetingScalarFieldEnum | Prisma.MeetingScalarFieldEnum[]
+}
+
+/**
+ * Project.geminiApiKey
+ */
+export type Project$geminiApiKeyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserApiKey
+   */
+  select?: Prisma.UserApiKeySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserApiKey
+   */
+  omit?: Prisma.UserApiKeyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserApiKeyInclude<ExtArgs> | null
+  where?: Prisma.UserApiKeyWhereInput
+}
+
+/**
+ * Project.transcriptionApiKey
+ */
+export type Project$transcriptionApiKeyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserApiKey
+   */
+  select?: Prisma.UserApiKeySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserApiKey
+   */
+  omit?: Prisma.UserApiKeyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserApiKeyInclude<ExtArgs> | null
+  where?: Prisma.UserApiKeyWhereInput
 }
 
 /**

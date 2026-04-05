@@ -12,9 +12,9 @@ async function bootstrap() {
         new FastifyAdapter({ logger: true }),
         { rawBody: true },
     );
-    
+
     const configService = app.get(ConfigService);
-    
+
     app.enableCors({
         origin: configService.get('FRONTEND_URL') || 'http://localhost:3000',
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',

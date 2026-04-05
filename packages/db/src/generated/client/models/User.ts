@@ -243,6 +243,7 @@ export type UserWhereInput = {
   userToProjects?: Prisma.UserToProjectListRelationFilter
   questionsAsked?: Prisma.QuestionListRelationFilter
   Transactions?: Prisma.TransactionListRelationFilter
+  apiKeys?: Prisma.UserApiKeyListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -257,6 +258,7 @@ export type UserOrderByWithRelationInput = {
   userToProjects?: Prisma.UserToProjectOrderByRelationAggregateInput
   questionsAsked?: Prisma.QuestionOrderByRelationAggregateInput
   Transactions?: Prisma.TransactionOrderByRelationAggregateInput
+  apiKeys?: Prisma.UserApiKeyOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -274,6 +276,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   userToProjects?: Prisma.UserToProjectListRelationFilter
   questionsAsked?: Prisma.QuestionListRelationFilter
   Transactions?: Prisma.TransactionListRelationFilter
+  apiKeys?: Prisma.UserApiKeyListRelationFilter
 }, "id" | "emailAddress">
 
 export type UserOrderByWithAggregationInput = {
@@ -318,6 +321,7 @@ export type UserCreateInput = {
   userToProjects?: Prisma.UserToProjectCreateNestedManyWithoutUserInput
   questionsAsked?: Prisma.QuestionCreateNestedManyWithoutUserInput
   Transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.UserApiKeyCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -332,6 +336,7 @@ export type UserUncheckedCreateInput = {
   userToProjects?: Prisma.UserToProjectUncheckedCreateNestedManyWithoutUserInput
   questionsAsked?: Prisma.QuestionUncheckedCreateNestedManyWithoutUserInput
   Transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.UserApiKeyUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -346,6 +351,7 @@ export type UserUpdateInput = {
   userToProjects?: Prisma.UserToProjectUpdateManyWithoutUserNestedInput
   questionsAsked?: Prisma.QuestionUpdateManyWithoutUserNestedInput
   Transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.UserApiKeyUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -360,6 +366,7 @@ export type UserUncheckedUpdateInput = {
   userToProjects?: Prisma.UserToProjectUncheckedUpdateManyWithoutUserNestedInput
   questionsAsked?: Prisma.QuestionUncheckedUpdateManyWithoutUserNestedInput
   Transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.UserApiKeyUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -503,6 +510,20 @@ export type UserUpdateOneRequiredWithoutTransactionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTransactionsInput, Prisma.UserUpdateWithoutTransactionsInput>, Prisma.UserUncheckedUpdateWithoutTransactionsInput>
 }
 
+export type UserCreateNestedOneWithoutApiKeysInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutApiKeysInput, Prisma.UserUncheckedCreateWithoutApiKeysInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutApiKeysInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutApiKeysNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutApiKeysInput, Prisma.UserUncheckedCreateWithoutApiKeysInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutApiKeysInput
+  upsert?: Prisma.UserUpsertWithoutApiKeysInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutApiKeysInput, Prisma.UserUpdateWithoutApiKeysInput>, Prisma.UserUncheckedUpdateWithoutApiKeysInput>
+}
+
 export type UserCreateWithoutUserToProjectsInput = {
   id?: string
   createdAt?: Date | string
@@ -514,6 +535,7 @@ export type UserCreateWithoutUserToProjectsInput = {
   credits?: number
   questionsAsked?: Prisma.QuestionCreateNestedManyWithoutUserInput
   Transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.UserApiKeyCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUserToProjectsInput = {
@@ -527,6 +549,7 @@ export type UserUncheckedCreateWithoutUserToProjectsInput = {
   credits?: number
   questionsAsked?: Prisma.QuestionUncheckedCreateNestedManyWithoutUserInput
   Transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.UserApiKeyUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUserToProjectsInput = {
@@ -556,6 +579,7 @@ export type UserUpdateWithoutUserToProjectsInput = {
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   questionsAsked?: Prisma.QuestionUpdateManyWithoutUserNestedInput
   Transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.UserApiKeyUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserToProjectsInput = {
@@ -569,6 +593,7 @@ export type UserUncheckedUpdateWithoutUserToProjectsInput = {
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   questionsAsked?: Prisma.QuestionUncheckedUpdateManyWithoutUserNestedInput
   Transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.UserApiKeyUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutQuestionsAskedInput = {
@@ -582,6 +607,7 @@ export type UserCreateWithoutQuestionsAskedInput = {
   credits?: number
   userToProjects?: Prisma.UserToProjectCreateNestedManyWithoutUserInput
   Transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.UserApiKeyCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutQuestionsAskedInput = {
@@ -595,6 +621,7 @@ export type UserUncheckedCreateWithoutQuestionsAskedInput = {
   credits?: number
   userToProjects?: Prisma.UserToProjectUncheckedCreateNestedManyWithoutUserInput
   Transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.UserApiKeyUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutQuestionsAskedInput = {
@@ -624,6 +651,7 @@ export type UserUpdateWithoutQuestionsAskedInput = {
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   userToProjects?: Prisma.UserToProjectUpdateManyWithoutUserNestedInput
   Transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.UserApiKeyUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutQuestionsAskedInput = {
@@ -637,6 +665,7 @@ export type UserUncheckedUpdateWithoutQuestionsAskedInput = {
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   userToProjects?: Prisma.UserToProjectUncheckedUpdateManyWithoutUserNestedInput
   Transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.UserApiKeyUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTransactionsInput = {
@@ -650,6 +679,7 @@ export type UserCreateWithoutTransactionsInput = {
   credits?: number
   userToProjects?: Prisma.UserToProjectCreateNestedManyWithoutUserInput
   questionsAsked?: Prisma.QuestionCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.UserApiKeyCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTransactionsInput = {
@@ -663,6 +693,7 @@ export type UserUncheckedCreateWithoutTransactionsInput = {
   credits?: number
   userToProjects?: Prisma.UserToProjectUncheckedCreateNestedManyWithoutUserInput
   questionsAsked?: Prisma.QuestionUncheckedCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.UserApiKeyUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTransactionsInput = {
@@ -692,6 +723,7 @@ export type UserUpdateWithoutTransactionsInput = {
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   userToProjects?: Prisma.UserToProjectUpdateManyWithoutUserNestedInput
   questionsAsked?: Prisma.QuestionUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.UserApiKeyUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTransactionsInput = {
@@ -705,6 +737,79 @@ export type UserUncheckedUpdateWithoutTransactionsInput = {
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   userToProjects?: Prisma.UserToProjectUncheckedUpdateManyWithoutUserNestedInput
   questionsAsked?: Prisma.QuestionUncheckedUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.UserApiKeyUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutApiKeysInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  imageUrl?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  emailAddress: string
+  credits?: number
+  userToProjects?: Prisma.UserToProjectCreateNestedManyWithoutUserInput
+  questionsAsked?: Prisma.QuestionCreateNestedManyWithoutUserInput
+  Transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutApiKeysInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  imageUrl?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  emailAddress: string
+  credits?: number
+  userToProjects?: Prisma.UserToProjectUncheckedCreateNestedManyWithoutUserInput
+  questionsAsked?: Prisma.QuestionUncheckedCreateNestedManyWithoutUserInput
+  Transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutApiKeysInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutApiKeysInput, Prisma.UserUncheckedCreateWithoutApiKeysInput>
+}
+
+export type UserUpsertWithoutApiKeysInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutApiKeysInput, Prisma.UserUncheckedUpdateWithoutApiKeysInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutApiKeysInput, Prisma.UserUncheckedCreateWithoutApiKeysInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutApiKeysInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutApiKeysInput, Prisma.UserUncheckedUpdateWithoutApiKeysInput>
+}
+
+export type UserUpdateWithoutApiKeysInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  credits?: Prisma.IntFieldUpdateOperationsInput | number
+  userToProjects?: Prisma.UserToProjectUpdateManyWithoutUserNestedInput
+  questionsAsked?: Prisma.QuestionUpdateManyWithoutUserNestedInput
+  Transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutApiKeysInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  credits?: Prisma.IntFieldUpdateOperationsInput | number
+  userToProjects?: Prisma.UserToProjectUncheckedUpdateManyWithoutUserNestedInput
+  questionsAsked?: Prisma.QuestionUncheckedUpdateManyWithoutUserNestedInput
+  Transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -716,12 +821,14 @@ export type UserCountOutputType = {
   userToProjects: number
   questionsAsked: number
   Transactions: number
+  apiKeys: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   userToProjects?: boolean | UserCountOutputTypeCountUserToProjectsArgs
   questionsAsked?: boolean | UserCountOutputTypeCountQuestionsAskedArgs
   Transactions?: boolean | UserCountOutputTypeCountTransactionsArgs
+  apiKeys?: boolean | UserCountOutputTypeCountApiKeysArgs
 }
 
 /**
@@ -755,6 +862,13 @@ export type UserCountOutputTypeCountTransactionsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.TransactionWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountApiKeysArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserApiKeyWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -768,6 +882,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   userToProjects?: boolean | Prisma.User$userToProjectsArgs<ExtArgs>
   questionsAsked?: boolean | Prisma.User$questionsAskedArgs<ExtArgs>
   Transactions?: boolean | Prisma.User$TransactionsArgs<ExtArgs>
+  apiKeys?: boolean | Prisma.User$apiKeysArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -809,6 +924,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   userToProjects?: boolean | Prisma.User$userToProjectsArgs<ExtArgs>
   questionsAsked?: boolean | Prisma.User$questionsAskedArgs<ExtArgs>
   Transactions?: boolean | Prisma.User$TransactionsArgs<ExtArgs>
+  apiKeys?: boolean | Prisma.User$apiKeysArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -820,6 +936,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     userToProjects: Prisma.$UserToProjectPayload<ExtArgs>[]
     questionsAsked: Prisma.$QuestionPayload<ExtArgs>[]
     Transactions: Prisma.$TransactionPayload<ExtArgs>[]
+    apiKeys: Prisma.$UserApiKeyPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1227,6 +1344,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   userToProjects<T extends Prisma.User$userToProjectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userToProjectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserToProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   questionsAsked<T extends Prisma.User$questionsAskedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$questionsAskedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Transactions<T extends Prisma.User$TransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$TransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  apiKeys<T extends Prisma.User$apiKeysArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$apiKeysArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1721,6 +1839,30 @@ export type User$TransactionsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.TransactionScalarFieldEnum | Prisma.TransactionScalarFieldEnum[]
+}
+
+/**
+ * User.apiKeys
+ */
+export type User$apiKeysArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserApiKey
+   */
+  select?: Prisma.UserApiKeySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserApiKey
+   */
+  omit?: Prisma.UserApiKeyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserApiKeyInclude<ExtArgs> | null
+  where?: Prisma.UserApiKeyWhereInput
+  orderBy?: Prisma.UserApiKeyOrderByWithRelationInput | Prisma.UserApiKeyOrderByWithRelationInput[]
+  cursor?: Prisma.UserApiKeyWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserApiKeyScalarFieldEnum | Prisma.UserApiKeyScalarFieldEnum[]
 }
 
 /**

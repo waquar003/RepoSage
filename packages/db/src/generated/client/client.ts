@@ -89,3 +89,8 @@ export type Issue = Prisma.IssueModel
  * 
  */
 export type Transaction = Prisma.TransactionModel
+/**
+ * Model UserApiKey
+ * 
+ */
+export type UserApiKey = Prisma.UserApiKeyModel

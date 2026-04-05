@@ -16,3 +16,11 @@ export const MeetingStatus = {
 } as const
 
 export type MeetingStatus = (typeof MeetingStatus)[keyof typeof MeetingStatus]
+
+
+export const ApiKeyProvider = {
+  GEMINI: 'GEMINI',
+  ASSEMBLYAI: 'ASSEMBLYAI'
+} as const
+
+export type ApiKeyProvider = (typeof ApiKeyProvider)[keyof typeof ApiKeyProvider]

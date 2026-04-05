@@ -1,3 +1,4 @@
+import { EncryptionService } from './common/services/encryption.service';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -9,6 +10,7 @@ import { MeetingsModule } from './meetings/meetings.module';
 import { BillingModule } from './billing/billing.module';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
+import { ApiKeysModule } from './api-keys/api-keys.module';
 
 @Module({
     imports: [
@@ -23,8 +25,9 @@ import { ConfigModule } from '@nestjs/config';
         MeetingsModule,
         BillingModule,
         UsersModule,
+        ApiKeysModule,
     ],
     controllers: [AppController],
-    providers: [AppService],
+    providers: [EncryptionService, AppService],
 })
 export class AppModule {}

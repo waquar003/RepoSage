@@ -30,6 +30,8 @@ model User {
     questionsAsked Question[]
 
     Transactions Transaction[]
+
+    apiKeys UserApiKey[]
 }
 
 model Project {
@@ -49,6 +51,12 @@ model Project {
     savedQuestions Question[] 
 
     meetings Meeting[]
+
+    geminiApiKeyId String?
+    geminiApiKey UserApiKey? @relation("GeminiKey", fields: [geminiApiKeyId], references: [id])
+
+    transcriptionApiKeyId String?
+    transcriptionApiKey UserApiKey? @relation("TranscriptionKey", fields: [transcriptionApiKeyId], references: [id])
 }
 
 model UserToProject {
@@ -174,4 +182,28 @@ model Transaction {
     userId String
     user User @relation(fields: [userId], references: [id])
     credits Int
+}
+
+enum ApiKeyProvider {
+    GEMINI
+    ASSEMBLYAI
+}
+
+model UserApiKey {
+    id String @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    name String
+    provider ApiKeyProvider
+    key String
+    iv String
+
+    userId String
+    user User @relation(fields: [userId], references: [id])
+
+    projectsAsGemini Project[] @relation("GeminiKey")
+    projectsAsTranscription Project[] @relation("TranscriptionKey")
+
+    @@index([userId])
 }

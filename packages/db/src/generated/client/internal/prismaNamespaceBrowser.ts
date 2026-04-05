@@ -60,7 +60,8 @@ export const ModelName = {
   Meeting: 'Meeting',
   Utterance: 'Utterance',
   Issue: 'Issue',
-  Transaction: 'Transaction'
+  Transaction: 'Transaction',
+  UserApiKey: 'UserApiKey'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -99,7 +100,9 @@ export const ProjectScalarFieldEnum = {
   updatedAt: 'updatedAt',
   name: 'name',
   githubUrl: 'githubUrl',
-  deletedAt: 'deletedAt'
+  deletedAt: 'deletedAt',
+  geminiApiKeyId: 'geminiApiKeyId',
+  transcriptionApiKeyId: 'transcriptionApiKeyId'
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
@@ -210,6 +213,20 @@ export const TransactionScalarFieldEnum = {
 } as const
 
 export type TransactionScalarFieldEnum = (typeof TransactionScalarFieldEnum)[keyof typeof TransactionScalarFieldEnum]
+
+
+export const UserApiKeyScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  name: 'name',
+  provider: 'provider',
+  key: 'key',
+  iv: 'iv',
+  userId: 'userId'
+} as const
+
+export type UserApiKeyScalarFieldEnum = (typeof UserApiKeyScalarFieldEnum)[keyof typeof UserApiKeyScalarFieldEnum]
 
 
 export const SortOrder = {

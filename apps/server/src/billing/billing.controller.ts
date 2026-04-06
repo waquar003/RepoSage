@@ -5,6 +5,7 @@ import {
     Headers,
     HttpCode,
     Post,
+    Get,
     Req,
     UseGuards,
     type RawBodyRequest,
@@ -13,6 +14,7 @@ import type { FastifyRequest } from 'fastify';
 import { BillingService } from './billing.service';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 import { AuthGuard } from 'src/common/guards/auth.guard';
+import { AuthenticatedRequest } from 'src/common/types';
 
 @Controller('billing')
 export class BillingController {
@@ -23,11 +25,17 @@ export class BillingController {
     @HttpCode(200)
     @ResponseMessage('Checkout session generated')
     async createCheckout(
-        @Body('userId') userId: string,
+        @Req() request: RawBodyRequest<AuthenticatedRequest>,
         @Body('credits') credits: number,
-        @Body('priceInCents') priceInCents: number,
+        @Body('priceInPaisa') priceInPaisa: number,
     ) {
-        return this.billingService.createCheckoutSession(userId, credits, priceInCents);
+        return this.billingService.createCheckoutSession(request.userId, credits, priceInPaisa);
+    }
+
+    @Get('transactions')
+    @UseGuards(AuthGuard)
+    async getTransactions(@Req() request: RawBodyRequest<AuthenticatedRequest>) {
+        return this.billingService.getTransactions(request.userId);
     }
 
     @Post('webhook/billing')

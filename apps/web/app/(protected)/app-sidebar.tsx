@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/sidebar';
 import { useProject } from '@/hooks/use-project';
 import { cn } from '@/lib/utils';
-import { Key } from 'lucide-react';
+import { CreditCard, Key } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -21,6 +21,11 @@ const items = [
         title: 'Credential',
         url: '/credential',
         icon: Key,
+    },
+    {
+        title: 'Billing',
+        url: '/billing',
+        icon: CreditCard,
     },
 ];
 
